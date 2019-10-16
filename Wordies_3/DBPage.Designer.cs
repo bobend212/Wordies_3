@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDB = new System.Windows.Forms.DataGridView();
             this.txtWord1 = new System.Windows.Forms.TextBox();
             this.lWord1 = new System.Windows.Forms.Label();
             this.lTranslation1 = new System.Windows.Forms.Label();
@@ -37,16 +37,18 @@
             this.btnDeleteWord = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnCloseDB = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvDB
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 81);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(674, 388);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvDB.BackgroundColor = System.Drawing.SystemColors.ControlDark;
+            this.dgvDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dgvDB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDB.Location = new System.Drawing.Point(12, 81);
+            this.dgvDB.Name = "dgvDB";
+            this.dgvDB.Size = new System.Drawing.Size(674, 388);
+            this.dgvDB.TabIndex = 0;
             // 
             // txtWord1
             // 
@@ -143,11 +145,11 @@
             this.Controls.Add(this.lTranslation1);
             this.Controls.Add(this.lWord1);
             this.Controls.Add(this.txtWord1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvDB);
             this.Name = "DBPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DBPage";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,7 +157,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDB;
         private System.Windows.Forms.TextBox txtWord1;
         private System.Windows.Forms.Label lWord1;
         private System.Windows.Forms.Label lTranslation1;
