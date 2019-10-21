@@ -34,10 +34,16 @@
             this.lTranslation1 = new System.Windows.Forms.Label();
             this.txtTranslation1 = new System.Windows.Forms.TextBox();
             this.btnAddWord = new System.Windows.Forms.Button();
-            this.btnDeleteWord = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnCloseDB = new System.Windows.Forms.Button();
+            this.btnDeleteWord = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Translation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDB
@@ -45,15 +51,21 @@
             this.dgvDB.BackgroundColor = System.Drawing.SystemColors.ControlDark;
             this.dgvDB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvDB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDB.Location = new System.Drawing.Point(12, 81);
+            this.dgvDB.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ID,
+            this.Word,
+            this.Translation});
+            this.dgvDB.Location = new System.Drawing.Point(329, 12);
             this.dgvDB.Name = "dgvDB";
-            this.dgvDB.Size = new System.Drawing.Size(674, 388);
+            this.dgvDB.ReadOnly = true;
+            this.dgvDB.Size = new System.Drawing.Size(625, 388);
             this.dgvDB.TabIndex = 0;
+            this.dgvDB.DoubleClick += new System.EventHandler(this.dgvDB_DoubleClick);
             // 
             // txtWord1
             // 
             this.txtWord1.Font = new System.Drawing.Font("Helvetica", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtWord1.Location = new System.Drawing.Point(12, 39);
+            this.txtWord1.Location = new System.Drawing.Point(16, 40);
             this.txtWord1.Multiline = true;
             this.txtWord1.Name = "txtWord1";
             this.txtWord1.Size = new System.Drawing.Size(282, 28);
@@ -63,7 +75,7 @@
             // lWord1
             // 
             this.lWord1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lWord1.Location = new System.Drawing.Point(12, 9);
+            this.lWord1.Location = new System.Drawing.Point(16, 10);
             this.lWord1.Name = "lWord1";
             this.lWord1.Size = new System.Drawing.Size(72, 27);
             this.lWord1.TabIndex = 2;
@@ -72,7 +84,7 @@
             // lTranslation1
             // 
             this.lTranslation1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lTranslation1.Location = new System.Drawing.Point(295, 9);
+            this.lTranslation1.Location = new System.Drawing.Point(16, 71);
             this.lTranslation1.Name = "lTranslation1";
             this.lTranslation1.Size = new System.Drawing.Size(135, 27);
             this.lTranslation1.TabIndex = 4;
@@ -81,7 +93,7 @@
             // txtTranslation1
             // 
             this.txtTranslation1.Font = new System.Drawing.Font("Helvetica", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtTranslation1.Location = new System.Drawing.Point(300, 39);
+            this.txtTranslation1.Location = new System.Drawing.Point(16, 101);
             this.txtTranslation1.Multiline = true;
             this.txtTranslation1.Name = "txtTranslation1";
             this.txtTranslation1.Size = new System.Drawing.Size(282, 28);
@@ -90,28 +102,20 @@
             // 
             // btnAddWord
             // 
-            this.btnAddWord.Location = new System.Drawing.Point(588, 29);
+            this.btnAddWord.Location = new System.Drawing.Point(27, 135);
             this.btnAddWord.Name = "btnAddWord";
-            this.btnAddWord.Size = new System.Drawing.Size(46, 46);
+            this.btnAddWord.Size = new System.Drawing.Size(82, 46);
             this.btnAddWord.TabIndex = 6;
             this.btnAddWord.Text = "Add+";
             this.btnAddWord.UseVisualStyleBackColor = true;
-            // 
-            // btnDeleteWord
-            // 
-            this.btnDeleteWord.Location = new System.Drawing.Point(640, 29);
-            this.btnDeleteWord.Name = "btnDeleteWord";
-            this.btnDeleteWord.Size = new System.Drawing.Size(46, 46);
-            this.btnDeleteWord.TabIndex = 7;
-            this.btnDeleteWord.Text = "DEL-";
-            this.btnDeleteWord.UseVisualStyleBackColor = true;
+            this.btnAddWord.Click += new System.EventHandler(this.btnAddWord_Click);
             // 
             // btnExit
             // 
             this.btnExit.BackColor = System.Drawing.Color.DarkRed;
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(605, 475);
+            this.btnExit.Location = new System.Drawing.Point(239, 365);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(81, 33);
             this.btnExit.TabIndex = 8;
@@ -124,7 +128,7 @@
             this.btnCloseDB.BackColor = System.Drawing.Color.IndianRed;
             this.btnCloseDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCloseDB.ForeColor = System.Drawing.Color.White;
-            this.btnCloseDB.Location = new System.Drawing.Point(518, 475);
+            this.btnCloseDB.Location = new System.Drawing.Point(152, 365);
             this.btnCloseDB.Name = "btnCloseDB";
             this.btnCloseDB.Size = new System.Drawing.Size(81, 33);
             this.btnCloseDB.TabIndex = 9;
@@ -132,26 +136,82 @@
             this.btnCloseDB.UseVisualStyleBackColor = false;
             this.btnCloseDB.Click += new System.EventHandler(this.btnCloseDB_Click);
             // 
+            // btnDeleteWord
+            // 
+            this.btnDeleteWord.Location = new System.Drawing.Point(115, 135);
+            this.btnDeleteWord.Name = "btnDeleteWord";
+            this.btnDeleteWord.Size = new System.Drawing.Size(82, 46);
+            this.btnDeleteWord.TabIndex = 10;
+            this.btnDeleteWord.Text = "Remove-";
+            this.btnDeleteWord.UseVisualStyleBackColor = true;
+            this.btnDeleteWord.Click += new System.EventHandler(this.btnDeleteWord_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(203, 135);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(82, 46);
+            this.btnCancel.TabIndex = 11;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.txtWord1);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.lWord1);
+            this.panel1.Controls.Add(this.btnDeleteWord);
+            this.panel1.Controls.Add(this.lTranslation1);
+            this.panel1.Controls.Add(this.txtTranslation1);
+            this.panel1.Controls.Add(this.btnAddWord);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(311, 201);
+            this.panel1.TabIndex = 12;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // Word
+            // 
+            this.Word.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Word.DataPropertyName = "Word1";
+            this.Word.HeaderText = "Word";
+            this.Word.Name = "Word";
+            this.Word.ReadOnly = true;
+            // 
+            // Translation
+            // 
+            this.Translation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Translation.DataPropertyName = "Translation1";
+            this.Translation.HeaderText = "Translation";
+            this.Translation.Name = "Translation";
+            this.Translation.ReadOnly = true;
+            // 
             // DBPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 516);
+            this.ClientSize = new System.Drawing.Size(964, 410);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnCloseDB);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.btnDeleteWord);
-            this.Controls.Add(this.btnAddWord);
-            this.Controls.Add(this.txtTranslation1);
-            this.Controls.Add(this.lTranslation1);
-            this.Controls.Add(this.lWord1);
-            this.Controls.Add(this.txtWord1);
             this.Controls.Add(this.dgvDB);
             this.Name = "DBPage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DBPage";
+            this.Load += new System.EventHandler(this.DBPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -163,8 +223,13 @@
         private System.Windows.Forms.Label lTranslation1;
         private System.Windows.Forms.TextBox txtTranslation1;
         private System.Windows.Forms.Button btnAddWord;
-        private System.Windows.Forms.Button btnDeleteWord;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnCloseDB;
+        private System.Windows.Forms.Button btnDeleteWord;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Word;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Translation;
     }
 }
