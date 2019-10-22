@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Wordies_3
 {
     public partial class DBPage : Form
     {
-        Word model = new Word();
-
-        //string connStr = @"Data Source=DESKTOP-3P9I28U\MATEUSZSQL; Initial Catalog=Wordies 2.0 DB; Integrated Security=True;";
+        Word modelWord = new Word();
+        List modelList = new List();
+        bool isNewListButtonClickedFlag = false;
 
         public DBPage()
         {
             InitializeComponent();
-            //LoadDB();
-            PopulateDataGridViewDB();
         }
 
+        #region Close_Exit_Erase_Buttons
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -41,91 +35,186 @@ namespace Wordies_3
         {
             Clear();
         }
+        #endregion
 
         private void Clear()
         {
-            txtWord1.Text = txtTranslation1.Text = "";
-            btnAddWord.Text = "Save";
+            txtWord1.Text = txtTranslation1.Text = txtTranslation2.Text = "";
+            btnAddWord.Text = "ADD NEW";
+            btnCancel.Text = "ERASE";
             btnDeleteWord.Enabled = false;
-            model.ID = 0;
+            modelWord.ID = 0;
         }
 
         private void DBPage_Load(object sender, EventArgs e)
         {
+            using (DBEntities db = new DBEntities())
+            {
+                db.Configuration.ProxyCreationEnabled = false;
+                cbLists.DataSource = db.Lists.ToList();
+                cbLists.ValueMember = "Name";
+                cbLists.DisplayMember = "ListOne";
+                //dgvDB.DataSource = db.Words.ToList<Word>();
+                
+                PopulateDataGridViewDB();
+            }
             Clear();
         }
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
-            model.Word1 = txtWord1.Text.Trim();
-            model.Translation1 = txtTranslation1.Text.Trim();
+            List obj = cbLists.SelectedItem as List;
+
+            modelWord.Word1 = txtWord1.Text.Trim();
+            modelWord.Translation1 = txtTranslation1.Text.Trim();
+            modelWord.Translation2 = txtTranslation2.Text.Trim();
+            modelWord.IDList = obj.IDList;
             using (DBEntities db = new DBEntities())
             {
-                if (model.ID == 0) //insert new record
-                    db.Words.Add(model);
+                if (modelWord.ID == 0) //insert new record
+                    db.Words.Add(modelWord);
                 else //update
-                    db.Entry(model).State = EntityState.Modified;
+                    db.Entry(modelWord).State = EntityState.Modified;
                 db.SaveChanges();
             }
             Clear();
             PopulateDataGridViewDB();
-            MessageBox.Show("Word added");
+            txtWord1.Focus();
         }
 
         private void PopulateDataGridViewDB()
         {
             dgvDB.AutoGenerateColumns = false;
-            using (DBEntities db = new DBEntities())
-            {
-                dgvDB.DataSource = db.Words.ToList<Word>();
-            }
-            //    public void LoadDB()
-            //{
-            //    using(SqlConnection sqlConn = new SqlConnection(connStr))
-            //    {
-            //        sqlConn.Open();
-            //        SqlDataAdapter sqlDA = new SqlDataAdapter("SELECT Word1, Translation1 FROM Words", sqlConn);
-            //        DataTable dtbl = new DataTable();
-            //        sqlDA.Fill(dtbl);
+            List obj = cbLists.SelectedItem as List;
 
-            //        dgvDB.DataSource = dtbl;
-            //        dgvDB.Columns[0].HeaderText = "**Word**";
-            //        dgvDB.Columns[1].HeaderText = "**Translation**";
-            //        dgvDB.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //        dgvDB.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            //    }
-            //}
+            if (obj != null)
+            {
+                try
+                {
+                    using (DBEntities db = new DBEntities())
+                    {
+                        db.Configuration.ProxyCreationEnabled = false;
+                        var query = from o in db.Words
+                                    where o.IDList == obj.IDList
+                                    select o;
+
+                        dgvDB.DataSource = query.ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "MessageXXXX", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void dgvDB_DoubleClick(object sender, EventArgs e)
         {
-            if(dgvDB.CurrentRow.Index != 1)
+
+            if (dgvDB.Rows.Count == 0)
             {
-                model.ID = Convert.ToInt32(dgvDB.CurrentRow.Cells["ID"].Value);
+                MessageBox.Show("This list is empty! Add some wordies :)");
+            }
+            else
+            {
+                modelWord.ID = Convert.ToInt32(dgvDB.CurrentRow.Cells["ID"].Value);
                 using (DBEntities db = new DBEntities())
                 {
-                    model = db.Words.Where(x => x.ID == model.ID).FirstOrDefault();
-                    txtWord1.Text = model.Word1;
-                    txtTranslation1.Text = model.Translation1;
+                    modelWord = db.Words.Where(x => x.ID == modelWord.ID).FirstOrDefault();
+                    txtWord1.Text = modelWord.Word1;
+                    txtTranslation1.Text = modelWord.Translation1;
+                    txtTranslation2.Text = modelWord.Translation2;
+
                 }
-                btnAddWord.Text = "Update";
+                btnAddWord.Text = "UPDATE";
+                btnCancel.Text = "CANCEL";
                 btnDeleteWord.Enabled = true;
             }
         }
 
         private void btnDeleteWord_Click(object sender, EventArgs e)
         {
-            using(DBEntities db = new DBEntities())
+            try
             {
-                var entry = db.Entry(model);
-                if (entry.State == EntityState.Detached)
-                    db.Words.Attach(model);
-                db.Words.Remove(model);
-                db.SaveChanges();
-                PopulateDataGridViewDB();
-                Clear();
-                MessageBox.Show("deleted!");
+                using (DBEntities db = new DBEntities())
+                {
+                    var entry = db.Entry(modelWord);
+                    if (entry.State == EntityState.Detached)
+                        db.Words.Attach(modelWord);
+                    db.Words.Remove(modelWord);
+                    db.SaveChanges();
+                    PopulateDataGridViewDB();
+                    Clear();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cbLists_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            List obj = cbLists.SelectedItem as List;
+            if(obj != null)
+            {
+                try
+                {
+                    using(DBEntities db = new DBEntities())
+                    {
+                        db.Configuration.ProxyCreationEnabled = false;
+                        var query = from o in db.Words
+                                    where o.IDList == obj.IDList
+                                    select o;
+                        dgvDB.DataSource = query.ToList();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnAddList_Click(object sender, EventArgs e)
+        {
+
+            if (isNewListButtonClickedFlag == false)
+            {
+                txtAddList.Visible = true;
+                //txtAddList.Focus();
+                btnAddList.Text = "CONFIRM";
+                btnAddList.BackColor = Color.MediumSeaGreen;
+                isNewListButtonClickedFlag = true;
+                AddNewList();
+            }
+            else
+            {
+                txtAddList.Visible = false;
+                txtWord1.Focus();
+                btnAddList.Text = "New List";
+                btnAddList.UseVisualStyleBackColor = true;
+                isNewListButtonClickedFlag = false;
+            }
+        }
+
+        //tutaj poprawic
+
+        private void AddNewList()
+        {
+            modelList.Name = txtAddList.Text.Trim();
+
+            using (DBEntities db = new DBEntities())
+            {
+                if (modelList.IDList == 0) //insert new record
+                    db.Lists.Add(modelList);
+                //else //update
+                //    db.Entry(modelWord).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            //Clear();
+            //PopulateDataGridViewDB();
+            txtWord1.Focus();
         }
     }
 }

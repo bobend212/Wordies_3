@@ -5,7 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="79fc9426be0c467080d86d7ad0184770" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.Word" Width="1.75" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.Word" Width="1.75" PointX="5.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.List" Width="1.5" PointX="1.625" PointY="1.875" />
+        <AssociationConnector Association="DBModel.FK_Words_Lists" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

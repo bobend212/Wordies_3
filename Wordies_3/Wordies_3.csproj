@@ -76,6 +76,9 @@
     <Compile Include="DBPage.Designer.cs">
       <DependentUpon>DBPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="List.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Start.cs">
       <SubType>Form</SubType>
     </Compile>

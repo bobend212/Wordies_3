@@ -4,7 +4,15 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Lists">
+          <Key>
+            <PropertyRef Name="IDList" />
+          </Key>
+          <Property Name="IDList" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="Words">
           <Key>
             <PropertyRef Name="ID" />
@@ -12,12 +20,30 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Word1" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Translation1" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Translation2" Type="varchar" MaxLength="100" />
+          <Property Name="IDList" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Words_Lists">
+          <End Role="Lists" Type="Self.Lists" Multiplicity="1" />
+          <End Role="Words" Type="Self.Words" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lists">
+              <PropertyRef Name="IDList" />
+            </Principal>
+            <Dependent Role="Words">
+              <PropertyRef Name="IDList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBModelStoreContainer">
+          <EntitySet Name="Lists" EntityType="Self.Lists" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Words" EntityType="Self.Words" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Words_Lists" Association="Self.FK_Words_Lists">
+            <End Role="Lists" EntitySet="Lists" />
+            <End Role="Words" EntitySet="Words" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -28,10 +54,39 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Word1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Translation1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Translation2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDList" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="List" Relationship="DBModel.FK_Words_Lists" FromRole="Word" ToRole="List" />
         </EntityType>
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Words" EntityType="Self.Word" />
+          <EntitySet Name="Lists" EntityType="DBModel.List" />
+          <AssociationSet Name="FK_Words_Lists" Association="DBModel.FK_Words_Lists">
+            <End Role="List" EntitySet="Lists" />
+            <End Role="Word" EntitySet="Words" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="IDList" />
+          </Key>
+          <Property Name="IDList" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Words" Relationship="DBModel.FK_Words_Lists" FromRole="List" ToRole="Word" />
+        </EntityType>
+        <Association Name="FK_Words_Lists">
+          <End Type="DBModel.List" Role="List" Multiplicity="1" />
+          <End Type="DBModel.Word" Role="Word" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="List">
+              <PropertyRef Name="IDList" />
+            </Principal>
+            <Dependent Role="Word">
+              <PropertyRef Name="IDList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -41,9 +96,20 @@
           <EntitySetMapping Name="Words">
             <EntityTypeMapping TypeName="DBModel.Word">
               <MappingFragment StoreEntitySet="Words">
+                <ScalarProperty Name="IDList" ColumnName="IDList" />
+                <ScalarProperty Name="Translation2" ColumnName="Translation2" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Word1" ColumnName="Word1" />
                 <ScalarProperty Name="Translation1" ColumnName="Translation1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lists">
+            <EntityTypeMapping TypeName="DBModel.List">
+              <MappingFragment StoreEntitySet="Lists">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDList" ColumnName="IDList" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

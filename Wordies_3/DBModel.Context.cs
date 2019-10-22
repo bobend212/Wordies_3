@@ -26,5 +26,6 @@ namespace Wordies_3
         }
     
         public virtual DbSet<Word> Words { get; set; }
+        public virtual DbSet<List> Lists { get; set; }
     }
 }

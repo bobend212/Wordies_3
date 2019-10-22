@@ -12,14 +12,19 @@ namespace Wordies_3
     using System;
     using System.Collections.Generic;
     
-    public partial class Word
+    public partial class List
     {
-        public int ID { get; set; }
-        public string Word1 { get; set; }
-        public string Translation1 { get; set; }
-        public string Translation2 { get; set; }
-        public int IDList { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public List()
+        {
+            this.Words = new HashSet<Word>();
+        }
     
-        public virtual List List { get; set; }
+        public int IDList { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Word> Words { get; set; }
     }
 }
