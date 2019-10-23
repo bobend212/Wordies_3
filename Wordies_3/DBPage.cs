@@ -11,7 +11,6 @@ namespace Wordies_3
     {
         Word modelWord = new Word();
         List modelList = new List();
-        bool isNewListButtonClickedFlag = false;
 
         public DBPage()
         {
@@ -35,8 +34,7 @@ namespace Wordies_3
         {
             Clear();
         }
-        #endregion
-
+        
         private void Clear()
         {
             txtWord1.Text = txtTranslation1.Text = txtTranslation2.Text = "";
@@ -44,9 +42,17 @@ namespace Wordies_3
             btnCancel.Text = "ERASE";
             btnDeleteWord.Enabled = false;
             modelWord.ID = 0;
+            modelList.IDList = 0;
         }
 
+        #endregion
+
         private void DBPage_Load(object sender, EventArgs e)
+        {
+            PopulateNewListComboBox();
+        }
+
+        public void PopulateNewListComboBox()
         {
             using (DBEntities db = new DBEntities())
             {
@@ -54,8 +60,7 @@ namespace Wordies_3
                 cbLists.DataSource = db.Lists.ToList();
                 cbLists.ValueMember = "Name";
                 cbLists.DisplayMember = "ListOne";
-                //dgvDB.DataSource = db.Words.ToList<Word>();
-                
+
                 PopulateDataGridViewDB();
             }
             Clear();
@@ -63,8 +68,19 @@ namespace Wordies_3
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
-            List obj = cbLists.SelectedItem as List;
+            if (string.IsNullOrWhiteSpace(txtWord1.Text) || string.IsNullOrWhiteSpace(txtTranslation1.Text))
+            {
+                MessageBox.Show("please fill all", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                AddWordToDB();
+            }
+        }
 
+        private void AddWordToDB()
+        {
+            List obj = cbLists.SelectedItem as List;
             modelWord.Word1 = txtWord1.Text.Trim();
             modelWord.Translation1 = txtTranslation1.Text.Trim();
             modelWord.Translation2 = txtTranslation2.Text.Trim();
@@ -178,43 +194,15 @@ namespace Wordies_3
 
         private void btnAddList_Click(object sender, EventArgs e)
         {
-
-            if (isNewListButtonClickedFlag == false)
-            {
-                txtAddList.Visible = true;
-                //txtAddList.Focus();
-                btnAddList.Text = "CONFIRM";
-                btnAddList.BackColor = Color.MediumSeaGreen;
-                isNewListButtonClickedFlag = true;
-                AddNewList();
-            }
-            else
-            {
-                txtAddList.Visible = false;
-                txtWord1.Focus();
-                btnAddList.Text = "New List";
-                btnAddList.UseVisualStyleBackColor = true;
-                isNewListButtonClickedFlag = false;
-            }
+            NewListForm newListForm = new NewListForm();
+            this.Close();
+            newListForm.Show();
         }
 
-        //tutaj poprawic
-
-        private void AddNewList()
+        private void btnRemoveList_Click(object sender, EventArgs e)
         {
-            modelList.Name = txtAddList.Text.Trim();
-
-            using (DBEntities db = new DBEntities())
-            {
-                if (modelList.IDList == 0) //insert new record
-                    db.Lists.Add(modelList);
-                //else //update
-                //    db.Entry(modelWord).State = EntityState.Modified;
-                db.SaveChanges();
-            }
-            //Clear();
-            //PopulateDataGridViewDB();
-            txtWord1.Focus();
+            // todo 
+            // implement list deletion
         }
     }
 }

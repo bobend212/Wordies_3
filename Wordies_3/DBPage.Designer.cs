@@ -52,7 +52,6 @@
             this.btnRemoveList = new System.Windows.Forms.Button();
             this.lWordsCounter = new System.Windows.Forms.Label();
             this.panelLists = new System.Windows.Forms.Panel();
-            this.txtAddList = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).BeginInit();
             this.panelWords.SuspendLayout();
@@ -276,6 +275,7 @@
             this.btnRemoveList.TabIndex = 7;
             this.btnRemoveList.Text = "Remove List";
             this.btnRemoveList.UseVisualStyleBackColor = true;
+            this.btnRemoveList.Click += new System.EventHandler(this.btnRemoveList_Click);
             // 
             // lWordsCounter
             // 
@@ -289,7 +289,6 @@
             // panelLists
             // 
             this.panelLists.BackColor = System.Drawing.Color.Khaki;
-            this.panelLists.Controls.Add(this.txtAddList);
             this.panelLists.Controls.Add(this.lSelectList);
             this.panelLists.Controls.Add(this.lWordsCounter);
             this.panelLists.Controls.Add(this.cbLists);
@@ -299,16 +298,6 @@
             this.panelLists.Name = "panelLists";
             this.panelLists.Size = new System.Drawing.Size(311, 120);
             this.panelLists.TabIndex = 9;
-            // 
-            // txtAddList
-            // 
-            this.txtAddList.Location = new System.Drawing.Point(146, 57);
-            this.txtAddList.Name = "txtAddList";
-            this.txtAddList.Size = new System.Drawing.Size(161, 20);
-            this.txtAddList.TabIndex = 9;
-            this.txtAddList.Text = "Sample";
-            this.txtAddList.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtAddList.Visible = false;
             // 
             // contextMenuStrip1
             // 
@@ -363,7 +352,6 @@
         private System.Windows.Forms.Button btnRemoveList;
         private System.Windows.Forms.Label lWordsCounter;
         private System.Windows.Forms.Panel panelLists;
-        private System.Windows.Forms.TextBox txtAddList;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
