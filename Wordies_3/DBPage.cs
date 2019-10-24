@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -18,6 +17,7 @@ namespace Wordies_3
         }
 
         #region Close_Exit_Erase_Buttons
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -50,6 +50,7 @@ namespace Wordies_3
         private void DBPage_Load(object sender, EventArgs e)
         {
             PopulateNewListComboBox();
+            PopulateDataGridViewDB();
         }
 
         public void PopulateNewListComboBox()
@@ -60,8 +61,6 @@ namespace Wordies_3
                 cbLists.DataSource = db.Lists.ToList();
                 cbLists.ValueMember = "Name";
                 cbLists.DisplayMember = "ListOne";
-
-                PopulateDataGridViewDB();
             }
             Clear();
         }
@@ -115,6 +114,7 @@ namespace Wordies_3
                                     select o;
 
                         dgvDB.DataSource = query.ToList();
+                        WordsCounter(query);
                     }
                 }
                 catch (Exception ex)
@@ -126,7 +126,11 @@ namespace Wordies_3
 
         private void dgvDB_DoubleClick(object sender, EventArgs e)
         {
+            DoubleClickOnDGV();
+        }
 
+        private void DoubleClickOnDGV()
+        {
             if (dgvDB.Rows.Count == 0)
             {
                 MessageBox.Show("This list is empty! Add some wordies :)");
@@ -140,7 +144,6 @@ namespace Wordies_3
                     txtWord1.Text = modelWord.Word1;
                     txtTranslation1.Text = modelWord.Translation1;
                     txtTranslation2.Text = modelWord.Translation2;
-
                 }
                 btnAddWord.Text = "UPDATE";
                 btnCancel.Text = "CANCEL";
@@ -149,6 +152,11 @@ namespace Wordies_3
         }
 
         private void btnDeleteWord_Click(object sender, EventArgs e)
+        {
+            DeleteWord();
+        }
+
+        private void DeleteWord()
         {
             try
             {
@@ -183,6 +191,7 @@ namespace Wordies_3
                                     where o.IDList == obj.IDList
                                     select o;
                         dgvDB.DataSource = query.ToList();
+                        WordsCounter(query);
                     }
                 }
                 catch(Exception ex)
@@ -192,17 +201,20 @@ namespace Wordies_3
             }
         }
 
-        private void btnAddList_Click(object sender, EventArgs e)
+        private void WordsCounter(IQueryable<Word> query)
+        {
+            int wordCounter = query.Count(x => x.ID > 0);
+            if(wordCounter == 0)
+                lWordsCounter.Text = "This List is empty.";
+            else
+                lWordsCounter.Text = "This List contain: " + wordCounter + " words.";
+        }
+
+        private void btnManageList_Click(object sender, EventArgs e)
         {
             NewListForm newListForm = new NewListForm();
             this.Close();
             newListForm.Show();
-        }
-
-        private void btnRemoveList_Click(object sender, EventArgs e)
-        {
-            // todo 
-            // implement list deletion
         }
     }
 }

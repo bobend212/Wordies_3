@@ -48,8 +48,7 @@
             this.txtTranslation2 = new System.Windows.Forms.TextBox();
             this.cbLists = new System.Windows.Forms.ComboBox();
             this.lSelectList = new System.Windows.Forms.Label();
-            this.btnAddList = new System.Windows.Forms.Button();
-            this.btnRemoveList = new System.Windows.Forms.Button();
+            this.btnManageLists = new System.Windows.Forms.Button();
             this.lWordsCounter = new System.Windows.Forms.Label();
             this.panelLists = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -257,34 +256,24 @@
             this.lSelectList.TabIndex = 1;
             this.lSelectList.Text = "Select List";
             // 
-            // btnAddList
+            // btnManageLists
             // 
-            this.btnAddList.Location = new System.Drawing.Point(5, 57);
-            this.btnAddList.Name = "btnAddList";
-            this.btnAddList.Size = new System.Drawing.Size(65, 44);
-            this.btnAddList.TabIndex = 3;
-            this.btnAddList.Text = "New List";
-            this.btnAddList.UseVisualStyleBackColor = true;
-            this.btnAddList.Click += new System.EventHandler(this.btnAddList_Click);
-            // 
-            // btnRemoveList
-            // 
-            this.btnRemoveList.Location = new System.Drawing.Point(75, 57);
-            this.btnRemoveList.Name = "btnRemoveList";
-            this.btnRemoveList.Size = new System.Drawing.Size(65, 44);
-            this.btnRemoveList.TabIndex = 7;
-            this.btnRemoveList.Text = "Remove List";
-            this.btnRemoveList.UseVisualStyleBackColor = true;
-            this.btnRemoveList.Click += new System.EventHandler(this.btnRemoveList_Click);
+            this.btnManageLists.Location = new System.Drawing.Point(70, 57);
+            this.btnManageLists.Name = "btnManageLists";
+            this.btnManageLists.Size = new System.Drawing.Size(146, 44);
+            this.btnManageLists.TabIndex = 3;
+            this.btnManageLists.Text = "LISTS MANAGER";
+            this.btnManageLists.UseVisualStyleBackColor = true;
+            this.btnManageLists.Click += new System.EventHandler(this.btnManageList_Click);
             // 
             // lWordsCounter
             // 
-            this.lWordsCounter.AutoSize = true;
-            this.lWordsCounter.Location = new System.Drawing.Point(257, 12);
+            this.lWordsCounter.Location = new System.Drawing.Point(128, 12);
             this.lWordsCounter.Name = "lWordsCounter";
-            this.lWordsCounter.Size = new System.Drawing.Size(50, 13);
+            this.lWordsCounter.Size = new System.Drawing.Size(179, 13);
             this.lWordsCounter.TabIndex = 8;
             this.lWordsCounter.Text = "Words: 0";
+            this.lWordsCounter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panelLists
             // 
@@ -292,8 +281,7 @@
             this.panelLists.Controls.Add(this.lSelectList);
             this.panelLists.Controls.Add(this.lWordsCounter);
             this.panelLists.Controls.Add(this.cbLists);
-            this.panelLists.Controls.Add(this.btnRemoveList);
-            this.panelLists.Controls.Add(this.btnAddList);
+            this.panelLists.Controls.Add(this.btnManageLists);
             this.panelLists.Location = new System.Drawing.Point(12, 276);
             this.panelLists.Name = "panelLists";
             this.panelLists.Size = new System.Drawing.Size(311, 120);
@@ -306,6 +294,7 @@
             // 
             // DBPage
             // 
+            this.AcceptButton = this.btnAddWord;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 443);
@@ -322,7 +311,6 @@
             this.panelWords.ResumeLayout(false);
             this.panelWords.PerformLayout();
             this.panelLists.ResumeLayout(false);
-            this.panelLists.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -342,14 +330,13 @@
         private System.Windows.Forms.Panel panelWords;
         private System.Windows.Forms.ComboBox cbLists;
         private System.Windows.Forms.Label lSelectList;
-        private System.Windows.Forms.Button btnAddList;
+        private System.Windows.Forms.Button btnManageLists;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Word;
         private System.Windows.Forms.DataGridViewTextBoxColumn Translation;
         private System.Windows.Forms.DataGridViewTextBoxColumn Translation2;
         private System.Windows.Forms.Label lAlternativeTranslation;
         private System.Windows.Forms.TextBox txtTranslation2;
-        private System.Windows.Forms.Button btnRemoveList;
         private System.Windows.Forms.Label lWordsCounter;
         private System.Windows.Forms.Panel panelLists;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

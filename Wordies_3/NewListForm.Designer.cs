@@ -29,13 +29,20 @@
         private void InitializeComponent()
         {
             this.gbNewList = new System.Windows.Forms.GroupBox();
-            this.btnCancelNewList = new System.Windows.Forms.Button();
-            this.btnAddList = new System.Windows.Forms.Button();
+            this.txtNewListDescr = new System.Windows.Forms.RichTextBox();
+            this.lDescription = new System.Windows.Forms.Label();
             this.txtNewListAdd = new System.Windows.Forms.TextBox();
             this.lNewListName = new System.Windows.Forms.Label();
-            this.lDescription = new System.Windows.Forms.Label();
-            this.txtNewListDescr = new System.Windows.Forms.RichTextBox();
+            this.btnCancelNewList = new System.Windows.Forms.Button();
+            this.btnAddList = new System.Windows.Forms.Button();
+            this.dgvLists = new System.Windows.Forms.DataGridView();
+            this.lLists = new System.Windows.Forms.Label();
+            this.btnRemoveList = new System.Windows.Forms.Button();
+            this.IDList = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbNewList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLists)).BeginInit();
             this.SuspendLayout();
             // 
             // gbNewList
@@ -51,6 +58,39 @@
             this.gbNewList.TabIndex = 0;
             this.gbNewList.TabStop = false;
             this.gbNewList.Text = "NEW LIST";
+            // 
+            // txtNewListDescr
+            // 
+            this.txtNewListDescr.Location = new System.Drawing.Point(49, 57);
+            this.txtNewListDescr.Name = "txtNewListDescr";
+            this.txtNewListDescr.Size = new System.Drawing.Size(244, 96);
+            this.txtNewListDescr.TabIndex = 5;
+            this.txtNewListDescr.Text = "";
+            // 
+            // lDescription
+            // 
+            this.lDescription.AutoSize = true;
+            this.lDescription.Location = new System.Drawing.Point(6, 57);
+            this.lDescription.Name = "lDescription";
+            this.lDescription.Size = new System.Drawing.Size(36, 13);
+            this.lDescription.TabIndex = 4;
+            this.lDescription.Text = "descr:";
+            // 
+            // txtNewListAdd
+            // 
+            this.txtNewListAdd.Location = new System.Drawing.Point(48, 23);
+            this.txtNewListAdd.Name = "txtNewListAdd";
+            this.txtNewListAdd.Size = new System.Drawing.Size(245, 20);
+            this.txtNewListAdd.TabIndex = 1;
+            // 
+            // lNewListName
+            // 
+            this.lNewListName.AutoSize = true;
+            this.lNewListName.Location = new System.Drawing.Point(6, 26);
+            this.lNewListName.Name = "lNewListName";
+            this.lNewListName.Size = new System.Drawing.Size(36, 13);
+            this.lNewListName.TabIndex = 0;
+            this.lNewListName.Text = "name:";
             // 
             // btnCancelNewList
             // 
@@ -73,53 +113,83 @@
             this.btnAddList.UseVisualStyleBackColor = false;
             this.btnAddList.Click += new System.EventHandler(this.btnAddList_Click);
             // 
-            // txtNewListAdd
+            // dgvLists
             // 
-            this.txtNewListAdd.Location = new System.Drawing.Point(48, 23);
-            this.txtNewListAdd.Name = "txtNewListAdd";
-            this.txtNewListAdd.Size = new System.Drawing.Size(245, 20);
-            this.txtNewListAdd.TabIndex = 1;
+            this.dgvLists.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLists.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDList,
+            this.ListName,
+            this.Descr});
+            this.dgvLists.Location = new System.Drawing.Point(318, 35);
+            this.dgvLists.Name = "dgvLists";
+            this.dgvLists.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvLists.Size = new System.Drawing.Size(451, 270);
+            this.dgvLists.TabIndex = 4;
+            this.dgvLists.DoubleClick += new System.EventHandler(this.dgvLists_DoubleClick);
             // 
-            // lNewListName
+            // lLists
             // 
-            this.lNewListName.AutoSize = true;
-            this.lNewListName.Location = new System.Drawing.Point(6, 26);
-            this.lNewListName.Name = "lNewListName";
-            this.lNewListName.Size = new System.Drawing.Size(36, 13);
-            this.lNewListName.TabIndex = 0;
-            this.lNewListName.Text = "name:";
+            this.lLists.AutoSize = true;
+            this.lLists.Location = new System.Drawing.Point(374, 12);
+            this.lLists.Name = "lLists";
+            this.lLists.Size = new System.Drawing.Size(126, 13);
+            this.lLists.TabIndex = 6;
+            this.lLists.Text = "Your lists with vocabulary";
             // 
-            // lDescription
+            // btnRemoveList
             // 
-            this.lDescription.AutoSize = true;
-            this.lDescription.Location = new System.Drawing.Point(6, 57);
-            this.lDescription.Name = "lDescription";
-            this.lDescription.Size = new System.Drawing.Size(36, 13);
-            this.lDescription.TabIndex = 4;
-            this.lDescription.Text = "descr:";
+            this.btnRemoveList.BackColor = System.Drawing.Color.Maroon;
+            this.btnRemoveList.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRemoveList.Location = new System.Drawing.Point(155, 187);
+            this.btnRemoveList.Name = "btnRemoveList";
+            this.btnRemoveList.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveList.TabIndex = 7;
+            this.btnRemoveList.Text = "Remove";
+            this.btnRemoveList.UseVisualStyleBackColor = false;
+            this.btnRemoveList.Visible = false;
+            this.btnRemoveList.Click += new System.EventHandler(this.btnRemoveList_Click);
             // 
-            // txtNewListDescr
+            // IDList
             // 
-            this.txtNewListDescr.Location = new System.Drawing.Point(49, 57);
-            this.txtNewListDescr.Name = "txtNewListDescr";
-            this.txtNewListDescr.Size = new System.Drawing.Size(244, 96);
-            this.txtNewListDescr.TabIndex = 5;
-            this.txtNewListDescr.Text = "";
+            this.IDList.DataPropertyName = "IDList";
+            this.IDList.HeaderText = "IDList";
+            this.IDList.Name = "IDList";
+            this.IDList.Visible = false;
+            // 
+            // ListName
+            // 
+            this.ListName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ListName.DataPropertyName = "Name";
+            this.ListName.HeaderText = "ListName";
+            this.ListName.Name = "ListName";
+            // 
+            // Descr
+            // 
+            this.Descr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descr.DataPropertyName = "Description";
+            this.Descr.HeaderText = "Descr";
+            this.Descr.Name = "Descr";
             // 
             // NewListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 218);
+            this.ClientSize = new System.Drawing.Size(781, 314);
+            this.Controls.Add(this.btnRemoveList);
+            this.Controls.Add(this.lLists);
+            this.Controls.Add(this.dgvLists);
             this.Controls.Add(this.gbNewList);
             this.Controls.Add(this.btnAddList);
             this.Controls.Add(this.btnCancelNewList);
             this.Name = "NewListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NewListForm";
+            this.Load += new System.EventHandler(this.NewListForm_Load);
             this.gbNewList.ResumeLayout(false);
             this.gbNewList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvLists)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -132,5 +202,11 @@
         private System.Windows.Forms.Button btnAddList;
         private System.Windows.Forms.RichTextBox txtNewListDescr;
         private System.Windows.Forms.Label lDescription;
+        private System.Windows.Forms.DataGridView dgvLists;
+        private System.Windows.Forms.Label lLists;
+        private System.Windows.Forms.Button btnRemoveList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ListName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Descr;
     }
 }
