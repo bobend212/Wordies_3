@@ -240,6 +240,7 @@
             // 
             // cbLists
             // 
+            this.cbLists.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLists.FormattingEnabled = true;
             this.cbLists.Location = new System.Drawing.Point(6, 30);
             this.cbLists.Name = "cbLists";

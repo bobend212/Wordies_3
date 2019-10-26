@@ -70,25 +70,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DBPage.cs">
+    <Compile Include="Forms\DBPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DBPage.Designer.cs">
+    <Compile Include="Forms\DBPage.Designer.cs">
       <DependentUpon>DBPage.cs</DependentUpon>
     </Compile>
     <Compile Include="List.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="NewListForm.cs">
+    <Compile Include="Forms\NewListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewListForm.Designer.cs">
+    <Compile Include="Forms\NewListForm.Designer.cs">
       <DependentUpon>NewListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Start.cs">
+    <Compile Include="Forms\Start.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Start.Designer.cs">
+    <Compile Include="Forms\Start.Designer.cs">
       <DependentUpon>Start.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -96,10 +96,10 @@
     <Compile Include="Word.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DBPage.resx">
+    <EmbeddedResource Include="Forms\DBPage.resx">
       <DependentUpon>DBPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewListForm.resx">
+    <EmbeddedResource Include="Forms\NewListForm.resx">
       <DependentUpon>NewListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -111,7 +111,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Start.resx">
+    <EmbeddedResource Include="Forms\Start.resx">
       <DependentUpon>Start.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DBModel.edmx">

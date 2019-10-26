@@ -36,11 +36,12 @@
             this.btnCancelNewList = new System.Windows.Forms.Button();
             this.btnAddList = new System.Windows.Forms.Button();
             this.dgvLists = new System.Windows.Forms.DataGridView();
-            this.lLists = new System.Windows.Forms.Label();
-            this.btnRemoveList = new System.Windows.Forms.Button();
             this.IDList = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lLists = new System.Windows.Forms.Label();
+            this.btnRemoveList = new System.Windows.Forms.Button();
+            this.btnEraseListEdit = new System.Windows.Forms.Button();
             this.gbNewList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLists)).BeginInit();
             this.SuspendLayout();
@@ -127,6 +128,27 @@
             this.dgvLists.TabIndex = 4;
             this.dgvLists.DoubleClick += new System.EventHandler(this.dgvLists_DoubleClick);
             // 
+            // IDList
+            // 
+            this.IDList.DataPropertyName = "IDList";
+            this.IDList.HeaderText = "IDList";
+            this.IDList.Name = "IDList";
+            this.IDList.Visible = false;
+            // 
+            // ListName
+            // 
+            this.ListName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ListName.DataPropertyName = "Name";
+            this.ListName.HeaderText = "ListName";
+            this.ListName.Name = "ListName";
+            // 
+            // Descr
+            // 
+            this.Descr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Descr.DataPropertyName = "Description";
+            this.Descr.HeaderText = "Descr";
+            this.Descr.Name = "Descr";
+            // 
             // lLists
             // 
             this.lLists.AutoSize = true;
@@ -149,32 +171,24 @@
             this.btnRemoveList.Visible = false;
             this.btnRemoveList.Click += new System.EventHandler(this.btnRemoveList_Click);
             // 
-            // IDList
+            // btnEraseListEdit
             // 
-            this.IDList.DataPropertyName = "IDList";
-            this.IDList.HeaderText = "IDList";
-            this.IDList.Name = "IDList";
-            this.IDList.Visible = false;
-            // 
-            // ListName
-            // 
-            this.ListName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ListName.DataPropertyName = "Name";
-            this.ListName.HeaderText = "ListName";
-            this.ListName.Name = "ListName";
-            // 
-            // Descr
-            // 
-            this.Descr.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descr.DataPropertyName = "Description";
-            this.Descr.HeaderText = "Descr";
-            this.Descr.Name = "Descr";
+            this.btnEraseListEdit.BackColor = System.Drawing.Color.Chocolate;
+            this.btnEraseListEdit.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnEraseListEdit.Location = new System.Drawing.Point(76, 187);
+            this.btnEraseListEdit.Name = "btnEraseListEdit";
+            this.btnEraseListEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEraseListEdit.TabIndex = 8;
+            this.btnEraseListEdit.Text = "Erase";
+            this.btnEraseListEdit.UseVisualStyleBackColor = false;
+            this.btnEraseListEdit.Click += new System.EventHandler(this.btnEraseListEdit_Click);
             // 
             // NewListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(781, 314);
+            this.Controls.Add(this.btnEraseListEdit);
             this.Controls.Add(this.btnRemoveList);
             this.Controls.Add(this.lLists);
             this.Controls.Add(this.dgvLists);
@@ -208,5 +222,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDList;
         private System.Windows.Forms.DataGridViewTextBoxColumn ListName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descr;
+        private System.Windows.Forms.Button btnEraseListEdit;
     }
 }

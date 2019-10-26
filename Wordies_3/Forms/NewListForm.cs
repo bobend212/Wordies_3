@@ -102,7 +102,7 @@ namespace Wordies_3
                     db.Lists.Remove(modelList);
                     db.SaveChanges();
                     PopulateDGViewLists();
-                    btnRemoveList.Visible = false;
+                    Clean();
                 }
             }
             catch (Exception ex)
@@ -134,6 +134,19 @@ namespace Wordies_3
                 btnRemoveList.Visible = true;
                 btnAddList.Text = "UPDATE";
             }
+        }
+
+        private void btnEraseListEdit_Click(object sender, EventArgs e)
+        {
+            Clean();
+        }
+
+        private void Clean()
+        {
+            txtNewListAdd.Text = txtNewListDescr.Text = "";
+            btnAddList.Text = "APPLY";
+            btnRemoveList.Visible = false;
+            modelList.IDList = 0;
         }
     }
 }
