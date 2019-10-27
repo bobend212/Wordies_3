@@ -76,6 +76,18 @@
     <Compile Include="Forms\DBPage.Designer.cs">
       <DependentUpon>DBPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LearnWay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LearnWay.Designer.cs">
+      <DependentUpon>LearnWay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ReadWrite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ReadWrite.Designer.cs">
+      <DependentUpon>ReadWrite.cs</DependentUpon>
+    </Compile>
     <Compile Include="List.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -91,6 +103,7 @@
     <Compile Include="Forms\Start.Designer.cs">
       <DependentUpon>Start.cs</DependentUpon>
     </Compile>
+    <Compile Include="HelperMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Word.cs">
@@ -99,8 +112,14 @@
     <EmbeddedResource Include="Forms\DBPage.resx">
       <DependentUpon>DBPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LearnWay.resx">
+      <DependentUpon>LearnWay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NewListForm.resx">
       <DependentUpon>NewListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ReadWrite.resx">
+      <DependentUpon>ReadWrite.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

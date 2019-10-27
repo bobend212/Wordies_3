@@ -30,8 +30,8 @@
         {
             this.btnExit = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnLearn = new System.Windows.Forms.Button();
             this.btnDatabase = new System.Windows.Forms.Button();
+            this.btnLearn = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,17 +62,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(124, 100);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // btnLearn
-            // 
-            this.btnLearn.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnLearn.ForeColor = System.Drawing.Color.White;
-            this.btnLearn.Location = new System.Drawing.Point(3, 3);
-            this.btnLearn.Name = "btnLearn";
-            this.btnLearn.Size = new System.Drawing.Size(118, 44);
-            this.btnLearn.TabIndex = 0;
-            this.btnLearn.Text = "LEARN!";
-            this.btnLearn.UseVisualStyleBackColor = false;
-            // 
             // btnDatabase
             // 
             this.btnDatabase.BackColor = System.Drawing.Color.SkyBlue;
@@ -83,6 +72,18 @@
             this.btnDatabase.Text = "DATABASE";
             this.btnDatabase.UseVisualStyleBackColor = false;
             this.btnDatabase.Click += new System.EventHandler(this.btnDatabase_Click);
+            // 
+            // btnLearn
+            // 
+            this.btnLearn.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnLearn.ForeColor = System.Drawing.Color.White;
+            this.btnLearn.Location = new System.Drawing.Point(3, 3);
+            this.btnLearn.Name = "btnLearn";
+            this.btnLearn.Size = new System.Drawing.Size(118, 44);
+            this.btnLearn.TabIndex = 0;
+            this.btnLearn.Text = "LEARN!";
+            this.btnLearn.UseVisualStyleBackColor = false;
+            this.btnLearn.Click += new System.EventHandler(this.btnLearn_Click);
             // 
             // Start
             // 

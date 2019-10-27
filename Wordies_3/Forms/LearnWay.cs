@@ -7,13 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Wordies_3.Forms;
 
-namespace Wordies_3
+namespace Wordies_3.Forms
 {
-    public partial class Start : Form
+    public partial class LearnWay : Form
     {
-        public Start()
+        public LearnWay()
         {
             InitializeComponent();
         }
@@ -23,18 +22,18 @@ namespace Wordies_3
             Application.Exit();
         }
 
-        private void btnDatabase_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
-            DBPage dbPage = new DBPage();
-            this.Hide();
-            dbPage.Show();
+            this.Close();
+            Start startPage = new Start();
+            startPage.Show();
         }
 
-        private void btnLearn_Click(object sender, EventArgs e)
+        private void btnReadWrite_Click(object sender, EventArgs e)
         {
-            LearnWay learnWay = new LearnWay();
-            this.Hide();
-            learnWay.Show();
+            ReadWrite readWrite = new ReadWrite();
+            this.Close();
+            readWrite.Show();
         }
     }
 }

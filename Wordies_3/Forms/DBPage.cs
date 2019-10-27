@@ -32,38 +32,40 @@ namespace Wordies_3
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            Clear();
+            HelperMethods.Clear(txtWord1, txtTranslation1, txtTranslation2, btnAddWord, btnCancel, btnDeleteWord, modelWord, modelList);
         }
         
-        private void Clear()
-        {
-            txtWord1.Text = txtTranslation1.Text = txtTranslation2.Text = "";
-            btnAddWord.Text = "ADD NEW";
-            btnCancel.Text = "ERASE";
-            btnDeleteWord.Enabled = false;
-            modelWord.ID = 0;
-            modelList.IDList = 0;
-        }
+        //private void Clear()
+        //{
+        //    txtWord1.Text = txtTranslation1.Text = txtTranslation2.Text = "";
+        //    btnAddWord.Text = "ADD NEW";
+        //    btnCancel.Text = "ERASE";
+        //    btnDeleteWord.Enabled = false;
+        //    modelWord.ID = 0;
+        //    modelList.IDList = 0;
+        //}
 
         #endregion
 
         private void DBPage_Load(object sender, EventArgs e)
         {
-            PopulateNewListComboBox();
+            //PopulateNewListComboBox();
+            HelperMethods.Clear(txtWord1, txtTranslation1, txtTranslation2, btnAddWord, btnCancel, btnDeleteWord, modelWord, modelList);
+            HelperMethods.PopulateComboBoxListsDB(cbLists);
             PopulateDataGridViewDB();
         }
 
-        public void PopulateNewListComboBox()
-        {
-            using (DBEntities db = new DBEntities())
-            {
-                db.Configuration.ProxyCreationEnabled = false;
-                cbLists.DataSource = db.Lists.ToList();
-                cbLists.ValueMember = "Name";
-                cbLists.DisplayMember = "ListOne";
-            }
-            Clear();
-        }
+        //public void PopulateNewListComboBox()
+        //{
+        //    using (DBEntities db = new DBEntities())
+        //    {
+        //        db.Configuration.ProxyCreationEnabled = false;
+        //        cbLists.DataSource = db.Lists.ToList();
+        //        cbLists.ValueMember = "Name";
+        //        //cbLists.DisplayMember = "ListOne";
+        //    }
+        //    Populate.Clear(txtWord1, txtTranslation1, txtTranslation2, btnAddWord, btnCancel, btnDeleteWord, modelWord, modelList);
+        //}
 
         private void btnAddWord_Click(object sender, EventArgs e)
         {
@@ -92,7 +94,7 @@ namespace Wordies_3
                     db.Entry(modelWord).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            Clear();
+            HelperMethods.Clear(txtWord1, txtTranslation1, txtTranslation2, btnAddWord, btnCancel, btnDeleteWord, modelWord, modelList);
             PopulateDataGridViewDB();
             txtWord1.Focus();
         }
@@ -168,7 +170,7 @@ namespace Wordies_3
                     db.Words.Remove(modelWord);
                     db.SaveChanges();
                     PopulateDataGridViewDB();
-                    Clear();
+                    HelperMethods.Clear(txtWord1, txtTranslation1, txtTranslation2, btnAddWord, btnCancel, btnDeleteWord, modelWord, modelList);
                 }
             }
             catch (Exception ex)
