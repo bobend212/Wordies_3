@@ -142,7 +142,6 @@
             this.cbListsRW.Name = "cbListsRW";
             this.cbListsRW.Size = new System.Drawing.Size(301, 21);
             this.cbListsRW.TabIndex = 2;
-            this.cbListsRW.SelectionChangeCommitted += new System.EventHandler(this.cbListsRW_SelectionChangeCommitted);
             // 
             // btnPlay
             // 
@@ -186,6 +185,7 @@
             this.btnCheck.TabIndex = 12;
             this.btnCheck.Text = "CHECK";
             this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
             // 
             // btnNextWord
             // 

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Wordies_3.Forms
@@ -13,6 +8,7 @@ namespace Wordies_3.Forms
     public partial class ReadWrite : Form
     {
         DBPage dBPage = new DBPage();
+        int position = 0;
 
         public ReadWrite()
         {
@@ -36,38 +32,21 @@ namespace Wordies_3.Forms
             learnWay.Show();
         }
 
-
-
-        private void cbListsRW_SelectionChangeCommitted(object sender, EventArgs e)
+        private void DisplWord(List obj, DBEntities db, out int count, out Word query)
         {
-            //List obj = cbListsRW.SelectedItem as List;
-            //if (obj != null)
-            //{
-            //    try
-            //    {
-            //        using (DBEntities db = new DBEntities())
-            //        {
-            //            db.Configuration.ProxyCreationEnabled = false;
-            //            var query = db.Words.Where(x => obj.IDList == x.IDList).FirstOrDefault();
-            //            lQuestionWord.Text = query.Word1;
-
-            //            var count = db.Words.Count(x => obj.IDList == x.IDList);
-            //            MessageBox.Show(count.ToString());
-                        
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //}
+            count = db.Words.Count(x => obj.IDList == x.IDList);
+            db.Configuration.ProxyCreationEnabled = false;
+            query = db.Words
+                .Where(x => obj.IDList == x.IDList)
+                .OrderBy(x => x.ID)
+                .Skip(position)
+                .FirstOrDefault();
         }
-
-        int position = 0;
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
             position = 0;
+
             List obj = cbListsRW.SelectedItem as List;
             if (obj != null)
             {
@@ -75,28 +54,17 @@ namespace Wordies_3.Forms
                 {
                     using (DBEntities db = new DBEntities())
                     {
-                        var count = db.Words.Count(x => obj.IDList == x.IDList);
+                        int count;
+                        Word query;
+                        DisplWord(obj, db, out count, out query);
 
-                        db.Configuration.ProxyCreationEnabled = false;
-                        var query = db.Words
-                            .Where(x => obj.IDList == x.IDList)
-                            .OrderBy(x => x.ID)
-                            .Skip(position)
-                            .FirstOrDefault();
-
-                        //position++;
                         if (position <= count)
-                            lQuestionWord.Text = query.Word1 + count.ToString();
+                            lQuestionWord.Text = query.Word1;
                         else
                         {
                             MessageBox.Show("koniec listy");
                             position = count;
                         }
-                        //position++;
-                        //int xx = query.Word1.Count();
-                        //MessageBox.Show("NEXT: " + next.ToString());
-
-
                     }
                 }
                 catch (Exception ex)
@@ -104,11 +72,7 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            txtAnswerWord.Text = position.ToString();
         }
-
-        
-        
 
         private void btnNextWord_Click(object sender, EventArgs e)
         {
@@ -121,14 +85,9 @@ namespace Wordies_3.Forms
                 {
                     using (DBEntities db = new DBEntities())
                     {
-                        var count = db.Words.Count(x => obj.IDList == x.IDList);
-                        db.Configuration.ProxyCreationEnabled = false;
-                            var query = db.Words
-                                .Where(x => obj.IDList == x.IDList)
-                                .OrderBy(x => x.ID)
-                                .Skip(position)
-                                .FirstOrDefault();
-
+                        int count;
+                        Word query;
+                        DisplWord(obj, db, out count, out query);
 
                         if (position > count - 1)
                         {
@@ -137,13 +96,8 @@ namespace Wordies_3.Forms
                         }
                         else
                         {
-                            lQuestionWord.Text = query.Word1 + count.ToString();
+                            lQuestionWord.Text = query.Word1;
                         }
-
-                        //int xx = query.Word1.Count();
-                        //MessageBox.Show("NEXT: " + next.ToString());
-
-
                     }
                 }
                 catch (Exception ex)
@@ -151,14 +105,12 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            txtAnswerWord.Text = position.ToString();
         }
 
         private void btnPreviousWord_Click(object sender, EventArgs e)
         {
-                            position--;
+            position--;
 
-            //MessageBox.Show("PREV: " + next.ToString());
             List obj = cbListsRW.SelectedItem as List;
             if (obj != null)
             {
@@ -166,12 +118,6 @@ namespace Wordies_3.Forms
                 {
                     using (DBEntities db = new DBEntities())
                     {
-                        //if (position >= 1)
-                        
-
-                        
-
-
                         if (position < 0)
                         {
                             position = 0;
@@ -179,20 +125,11 @@ namespace Wordies_3.Forms
                         }
                         else
                         {
-                            var count = db.Words.Count(x => obj.IDList == x.IDList);
-                            db.Configuration.ProxyCreationEnabled = false;
-                            var query = db.Words
-                                .Where(x => obj.IDList == x.IDList)
-                                .OrderBy(x => x.ID)
-                                .Skip(position)
-                                .FirstOrDefault();
-                            lQuestionWord.Text = query.Word1 + count.ToString();
+                            int count;
+                            Word query;
+                            DisplWord(obj, db, out count, out query);
+                            lQuestionWord.Text = query.Word1;
                         }
-
-                        //int xx = query.Word1.Count();
-                        //MessageBox.Show(start.ToString());
-
-
                     }
                 }
                 catch (Exception ex)
@@ -200,7 +137,32 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            txtAnswerWord.Text = position.ToString();
+        }
+
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            List obj = cbListsRW.SelectedItem as List;
+
+            using (DBEntities db = new DBEntities())
+            {
+                var query = db.Words
+                    .Where(x => obj.IDList == x.IDList)
+                    .OrderBy(x => x.ID)
+                    .Skip(position)
+                    .FirstOrDefault();
+
+                //tu wyrzuca error gdy w txtboxAnswer jest empty
+
+                if (txtAnswerWord.Text == query.Translation1.ToString() || txtAnswerWord.Text == query.Translation2.ToString())
+                {
+                    lResult.Text = "TRUE!";
+                }
+                else
+                {
+                    lResult.Text = "FALSE!";
+                }
+            }
+
 
         }
     }
