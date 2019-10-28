@@ -63,17 +63,11 @@ namespace Wordies_3.Forms
             //}
         }
 
+        int position = 0;
+
         private void btnPlay_Click(object sender, EventArgs e)
         {
-
-        }
-
-        int next = 1;
-        
-
-        private void btnNextWord_Click(object sender, EventArgs e)
-        {
-
+            position = 0;
             List obj = cbListsRW.SelectedItem as List;
             if (obj != null)
             {
@@ -83,20 +77,67 @@ namespace Wordies_3.Forms
                     {
                         var count = db.Words.Count(x => obj.IDList == x.IDList);
 
-                            db.Configuration.ProxyCreationEnabled = false;
-                            var query = db.Words
-                                .Where(x => obj.IDList == x.IDList)
-                                .OrderBy(x => x.ID)
-                                .Skip(next)
-                                .FirstOrDefault();
+                        db.Configuration.ProxyCreationEnabled = false;
+                        var query = db.Words
+                            .Where(x => obj.IDList == x.IDList)
+                            .OrderBy(x => x.ID)
+                            .Skip(position)
+                            .FirstOrDefault();
 
-                            next++;
-                        if (next <= count)
+                        //position++;
+                        if (position <= count)
                             lQuestionWord.Text = query.Word1 + count.ToString();
                         else
                         {
                             MessageBox.Show("koniec listy");
-                            next = count;
+                            position = count;
+                        }
+                        //position++;
+                        //int xx = query.Word1.Count();
+                        //MessageBox.Show("NEXT: " + next.ToString());
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            txtAnswerWord.Text = position.ToString();
+        }
+
+        
+        
+
+        private void btnNextWord_Click(object sender, EventArgs e)
+        {
+            position++;
+
+            List obj = cbListsRW.SelectedItem as List;
+            if (obj != null)
+            {
+                try
+                {
+                    using (DBEntities db = new DBEntities())
+                    {
+                        var count = db.Words.Count(x => obj.IDList == x.IDList);
+                        db.Configuration.ProxyCreationEnabled = false;
+                            var query = db.Words
+                                .Where(x => obj.IDList == x.IDList)
+                                .OrderBy(x => x.ID)
+                                .Skip(position)
+                                .FirstOrDefault();
+
+
+                        if (position > count - 1)
+                        {
+                            MessageBox.Show("koniec listy PRZOD");
+                            position = count - 1;
+                        }
+                        else
+                        {
+                            lQuestionWord.Text = query.Word1 + count.ToString();
                         }
 
                         //int xx = query.Word1.Count();
@@ -110,39 +151,42 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            txtAnswerWord.Text = next.ToString();
+            txtAnswerWord.Text = position.ToString();
         }
 
         private void btnPreviousWord_Click(object sender, EventArgs e)
         {
-            
+                            position--;
+
             //MessageBox.Show("PREV: " + next.ToString());
             List obj = cbListsRW.SelectedItem as List;
             if (obj != null)
             {
                 try
                 {
-                    next--;
                     using (DBEntities db = new DBEntities())
                     {
-                        var count = db.Words.Count(x => obj.IDList == x.IDList);
-
-                        db.Configuration.ProxyCreationEnabled = false;
-                        var query = db.Words
-                            .Where(x => obj.IDList == x.IDList)
-                            .OrderBy(x => x.ID)
-                            .Skip(next-1)
-                            .FirstOrDefault();
+                        //if (position >= 1)
+                        
 
                         
-                        if (next <= count)
+
+
+                        if (position < 0)
                         {
-                            lQuestionWord.Text = query.Word1 + count.ToString();
+                            position = 0;
+                            MessageBox.Show("koniec listy TYL");
                         }
                         else
                         {
-                            MessageBox.Show("koniec listy");
-                            next = 1;
+                            var count = db.Words.Count(x => obj.IDList == x.IDList);
+                            db.Configuration.ProxyCreationEnabled = false;
+                            var query = db.Words
+                                .Where(x => obj.IDList == x.IDList)
+                                .OrderBy(x => x.ID)
+                                .Skip(position)
+                                .FirstOrDefault();
+                            lQuestionWord.Text = query.Word1 + count.ToString();
                         }
 
                         //int xx = query.Word1.Count();
@@ -156,7 +200,7 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            txtAnswerWord.Text = next.ToString();
+            txtAnswerWord.Text = position.ToString();
 
         }
     }
