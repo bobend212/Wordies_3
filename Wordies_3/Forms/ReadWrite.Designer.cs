@@ -28,30 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnExit = new System.Windows.Forms.Button();
             this.panelLists = new System.Windows.Forms.Panel();
             this.gbOptions = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.lSelectList = new System.Windows.Forms.Label();
             this.cbListsRW = new System.Windows.Forms.ComboBox();
             this.btnPlay = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtAnswerWord = new System.Windows.Forms.TextBox();
             this.lAnswer = new System.Windows.Forms.Label();
             this.btnCheck = new System.Windows.Forms.Button();
             this.btnNextWord = new System.Windows.Forms.Button();
             this.btnPreviousWord = new System.Windows.Forms.Button();
             this.lResult = new System.Windows.Forms.Label();
-            this.pbProgressRW = new System.Windows.Forms.ProgressBar();
-            this.gbProgressRW = new System.Windows.Forms.GroupBox();
+            this.gbScore = new System.Windows.Forms.GroupBox();
             this.lQuestionWord = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.chbRandom = new System.Windows.Forms.CheckBox();
+            this.chbPrevDisable = new System.Windows.Forms.CheckBox();
+            this.chbAlfOrder = new System.Windows.Forms.CheckBox();
+            this.chbOrderInsertion = new System.Windows.Forms.CheckBox();
+            this.lScore = new System.Windows.Forms.Label();
+            this.btnHint = new System.Windows.Forms.Button();
+            this.lScoring = new System.Windows.Forms.Label();
             this.panelLists.SuspendLayout();
             this.gbOptions.SuspendLayout();
-            this.gbProgressRW.SuspendLayout();
+            this.gbScore.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
@@ -81,48 +82,16 @@
             // 
             // gbOptions
             // 
-            this.gbOptions.Controls.Add(this.radioButton3);
-            this.gbOptions.Controls.Add(this.radioButton1);
-            this.gbOptions.Controls.Add(this.radioButton2);
+            this.gbOptions.Controls.Add(this.chbOrderInsertion);
+            this.gbOptions.Controls.Add(this.chbAlfOrder);
+            this.gbOptions.Controls.Add(this.chbPrevDisable);
+            this.gbOptions.Controls.Add(this.chbRandom);
             this.gbOptions.Location = new System.Drawing.Point(10, 57);
             this.gbOptions.Name = "gbOptions";
-            this.gbOptions.Size = new System.Drawing.Size(116, 89);
+            this.gbOptions.Size = new System.Drawing.Size(199, 89);
             this.gbOptions.TabIndex = 11;
             this.gbOptions.TabStop = false;
             this.gbOptions.Text = "Options";
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(21, 65);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(85, 17);
-            this.radioButton3.TabIndex = 6;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "radioButton3";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(21, 19);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(85, 17);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(21, 42);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(85, 17);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "radioButton2";
-            this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // lSelectList
             // 
@@ -145,18 +114,14 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(142, 85);
+            this.btnPlay.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnPlay.Location = new System.Drawing.Point(215, 76);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(146, 44);
+            this.btnPlay.Size = new System.Drawing.Size(92, 52);
             this.btnPlay.TabIndex = 3;
             this.btnPlay.Text = "PLAY";
-            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.UseVisualStyleBackColor = false;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // txtAnswerWord
             // 
@@ -211,43 +176,36 @@
             // 
             // lResult
             // 
-            this.lResult.BackColor = System.Drawing.Color.Transparent;
+            this.lResult.BackColor = System.Drawing.Color.Black;
             this.lResult.Font = new System.Drawing.Font("Kristen ITC", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lResult.ForeColor = System.Drawing.Color.Lime;
-            this.lResult.Location = new System.Drawing.Point(10, 339);
+            this.lResult.Location = new System.Drawing.Point(11, 366);
             this.lResult.Name = "lResult";
             this.lResult.Size = new System.Drawing.Size(340, 53);
             this.lResult.TabIndex = 17;
             this.lResult.Text = "TRUE!";
             this.lResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pbProgressRW
+            // gbScore
             // 
-            this.pbProgressRW.Location = new System.Drawing.Point(7, 19);
-            this.pbProgressRW.Name = "pbProgressRW";
-            this.pbProgressRW.Size = new System.Drawing.Size(325, 23);
-            this.pbProgressRW.TabIndex = 18;
-            this.pbProgressRW.Value = 25;
-            // 
-            // gbProgressRW
-            // 
-            this.gbProgressRW.BackColor = System.Drawing.Color.Transparent;
-            this.gbProgressRW.Controls.Add(this.pbProgressRW);
-            this.gbProgressRW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.gbProgressRW.ForeColor = System.Drawing.Color.Yellow;
-            this.gbProgressRW.Location = new System.Drawing.Point(10, 395);
-            this.gbProgressRW.Name = "gbProgressRW";
-            this.gbProgressRW.Size = new System.Drawing.Size(338, 55);
-            this.gbProgressRW.TabIndex = 19;
-            this.gbProgressRW.TabStop = false;
-            this.gbProgressRW.Text = "PROGRESS";
+            this.gbScore.BackColor = System.Drawing.Color.Transparent;
+            this.gbScore.Controls.Add(this.lScoring);
+            this.gbScore.Controls.Add(this.lScore);
+            this.gbScore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gbScore.ForeColor = System.Drawing.Color.Yellow;
+            this.gbScore.Location = new System.Drawing.Point(17, 422);
+            this.gbScore.Name = "gbScore";
+            this.gbScore.Size = new System.Drawing.Size(330, 74);
+            this.gbScore.TabIndex = 19;
+            this.gbScore.TabStop = false;
+            this.gbScore.Text = "SCORE";
             // 
             // lQuestionWord
             // 
             this.lQuestionWord.BackColor = System.Drawing.Color.Transparent;
             this.lQuestionWord.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lQuestionWord.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lQuestionWord.ForeColor = System.Drawing.Color.Lime;
+            this.lQuestionWord.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.lQuestionWord.Location = new System.Drawing.Point(10, 168);
             this.lQuestionWord.Name = "lQuestionWord";
             this.lQuestionWord.Size = new System.Drawing.Size(340, 51);
@@ -265,6 +223,81 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // chbRandom
+            // 
+            this.chbRandom.AutoSize = true;
+            this.chbRandom.Location = new System.Drawing.Point(15, 19);
+            this.chbRandom.Name = "chbRandom";
+            this.chbRandom.Size = new System.Drawing.Size(66, 17);
+            this.chbRandom.TabIndex = 0;
+            this.chbRandom.Text = "Random";
+            this.chbRandom.UseVisualStyleBackColor = true;
+            // 
+            // chbPrevDisable
+            // 
+            this.chbPrevDisable.AutoSize = true;
+            this.chbPrevDisable.Location = new System.Drawing.Point(15, 42);
+            this.chbPrevDisable.Name = "chbPrevDisable";
+            this.chbPrevDisable.Size = new System.Drawing.Size(80, 17);
+            this.chbPrevDisable.TabIndex = 1;
+            this.chbPrevDisable.Text = "Prev. Word";
+            this.chbPrevDisable.UseVisualStyleBackColor = true;
+            this.chbPrevDisable.CheckedChanged += new System.EventHandler(this.chbPrevDisable_CheckedChanged);
+            // 
+            // chbAlfOrder
+            // 
+            this.chbAlfOrder.AutoSize = true;
+            this.chbAlfOrder.Location = new System.Drawing.Point(15, 65);
+            this.chbAlfOrder.Name = "chbAlfOrder";
+            this.chbAlfOrder.Size = new System.Drawing.Size(82, 17);
+            this.chbAlfOrder.TabIndex = 2;
+            this.chbAlfOrder.Text = "Alfab. Order";
+            this.chbAlfOrder.UseVisualStyleBackColor = true;
+            this.chbAlfOrder.CheckedChanged += new System.EventHandler(this.chbAlfOrder_CheckedChanged);
+            // 
+            // chbOrderInsertion
+            // 
+            this.chbOrderInsertion.AutoSize = true;
+            this.chbOrderInsertion.Checked = true;
+            this.chbOrderInsertion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbOrderInsertion.Location = new System.Drawing.Point(111, 19);
+            this.chbOrderInsertion.Name = "chbOrderInsertion";
+            this.chbOrderInsertion.Size = new System.Drawing.Size(84, 17);
+            this.chbOrderInsertion.TabIndex = 3;
+            this.chbOrderInsertion.Text = "Insert. Order";
+            this.chbOrderInsertion.UseVisualStyleBackColor = true;
+            // 
+            // lScore
+            // 
+            this.lScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
+            this.lScore.ForeColor = System.Drawing.Color.White;
+            this.lScore.Location = new System.Drawing.Point(7, 16);
+            this.lScore.Name = "lScore";
+            this.lScore.Size = new System.Drawing.Size(201, 46);
+            this.lScore.TabIndex = 0;
+            this.lScore.Tag = "";
+            this.lScore.Text = "18";
+            this.lScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnHint
+            // 
+            this.btnHint.Location = new System.Drawing.Point(140, 340);
+            this.btnHint.Name = "btnHint";
+            this.btnHint.Size = new System.Drawing.Size(75, 23);
+            this.btnHint.TabIndex = 22;
+            this.btnHint.Text = "HINT";
+            this.btnHint.UseVisualStyleBackColor = true;
+            this.btnHint.Click += new System.EventHandler(this.btnHint_Click);
+            // 
+            // lScoring
+            // 
+            this.lScoring.Location = new System.Drawing.Point(224, 16);
+            this.lScoring.Name = "lScoring";
+            this.lScoring.Size = new System.Drawing.Size(100, 46);
+            this.lScoring.TabIndex = 1;
+            this.lScoring.Text = "TRUE   +3\r\nFALSE  -1\r\nHINT   -2";
+            this.lScoring.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ReadWrite
             // 
             this.AcceptButton = this.btnCheck;
@@ -272,9 +305,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(362, 615);
+            this.Controls.Add(this.btnHint);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lQuestionWord);
-            this.Controls.Add(this.gbProgressRW);
+            this.Controls.Add(this.gbScore);
             this.Controls.Add(this.lResult);
             this.Controls.Add(this.btnPreviousWord);
             this.Controls.Add(this.btnNextWord);
@@ -291,7 +325,7 @@
             this.panelLists.ResumeLayout(false);
             this.gbOptions.ResumeLayout(false);
             this.gbOptions.PerformLayout();
-            this.gbProgressRW.ResumeLayout(false);
+            this.gbScore.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,23 +335,25 @@
 
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panelLists;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label lSelectList;
         private System.Windows.Forms.ComboBox cbListsRW;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.GroupBox gbOptions;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox txtAnswerWord;
         private System.Windows.Forms.Label lAnswer;
         private System.Windows.Forms.Button btnCheck;
         private System.Windows.Forms.Button btnNextWord;
         private System.Windows.Forms.Button btnPreviousWord;
         private System.Windows.Forms.Label lResult;
-        private System.Windows.Forms.ProgressBar pbProgressRW;
-        private System.Windows.Forms.GroupBox gbProgressRW;
+        private System.Windows.Forms.GroupBox gbScore;
         private System.Windows.Forms.Label lQuestionWord;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.CheckBox chbAlfOrder;
+        private System.Windows.Forms.CheckBox chbPrevDisable;
+        private System.Windows.Forms.CheckBox chbRandom;
+        private System.Windows.Forms.CheckBox chbOrderInsertion;
+        private System.Windows.Forms.Label lScore;
+        private System.Windows.Forms.Label lScoring;
+        private System.Windows.Forms.Button btnHint;
     }
 }
