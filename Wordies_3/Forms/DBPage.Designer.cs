@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.dgvDB = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Word = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,7 +50,8 @@
             this.btnManageLists = new System.Windows.Forms.Button();
             this.lWordsCounter = new System.Windows.Forms.Label();
             this.panelLists = new System.Windows.Forms.Panel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lListDescr = new System.Windows.Forms.Label();
+            this.txtListDescr = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDB)).BeginInit();
             this.panelWords.SuspendLayout();
             this.panelLists.SuspendLayout();
@@ -72,7 +72,7 @@
             this.dgvDB.Name = "dgvDB";
             this.dgvDB.ReadOnly = true;
             this.dgvDB.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDB.Size = new System.Drawing.Size(625, 423);
+            this.dgvDB.Size = new System.Drawing.Size(625, 384);
             this.dgvDB.TabIndex = 4;
             this.dgvDB.DoubleClick += new System.EventHandler(this.dgvDB_DoubleClick);
             // 
@@ -288,10 +288,24 @@
             this.panelLists.Size = new System.Drawing.Size(311, 120);
             this.panelLists.TabIndex = 9;
             // 
-            // contextMenuStrip1
+            // lListDescr
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.lListDescr.AutoSize = true;
+            this.lListDescr.Location = new System.Drawing.Point(330, 412);
+            this.lListDescr.Name = "lListDescr";
+            this.lListDescr.Size = new System.Drawing.Size(80, 13);
+            this.lListDescr.TabIndex = 10;
+            this.lListDescr.Text = "List description:";
+            // 
+            // txtListDescr
+            // 
+            this.txtListDescr.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Italic);
+            this.txtListDescr.Location = new System.Drawing.Point(416, 402);
+            this.txtListDescr.Multiline = true;
+            this.txtListDescr.Name = "txtListDescr";
+            this.txtListDescr.Size = new System.Drawing.Size(538, 33);
+            this.txtListDescr.TabIndex = 11;
+            this.txtListDescr.Text = "sample";
             // 
             // DBPage
             // 
@@ -299,6 +313,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 443);
+            this.Controls.Add(this.txtListDescr);
+            this.Controls.Add(this.lListDescr);
             this.Controls.Add(this.panelLists);
             this.Controls.Add(this.panelWords);
             this.Controls.Add(this.btnCloseDB);
@@ -313,6 +329,7 @@
             this.panelWords.PerformLayout();
             this.panelLists.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -340,6 +357,7 @@
         private System.Windows.Forms.TextBox txtTranslation2;
         private System.Windows.Forms.Label lWordsCounter;
         private System.Windows.Forms.Panel panelLists;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label lListDescr;
+        private System.Windows.Forms.TextBox txtListDescr;
     }
 }

@@ -189,11 +189,13 @@ namespace Wordies_3
                     using(DBEntities db = new DBEntities())
                     {
                         db.Configuration.ProxyCreationEnabled = false;
-                        var query = from o in db.Words
+                        var wordCnt = from o in db.Words
                                     where o.IDList == obj.IDList
                                     select o;
-                        dgvDB.DataSource = query.ToList();
-                        WordsCounter(query);
+                        dgvDB.DataSource = wordCnt.ToList();
+
+                        WordsCounter(wordCnt);
+                        
                     }
                 }
                 catch(Exception ex)
@@ -210,6 +212,8 @@ namespace Wordies_3
                 lWordsCounter.Text = "This List is empty.";
             else
                 lWordsCounter.Text = "This List contain: " + wordCounter + " words.";
+
+            txtListDescr.Text = wordCounter.ToString(); //tutaj zrobic tak aby wyswietlalo description dla listy.
         }
 
         private void btnManageList_Click(object sender, EventArgs e)

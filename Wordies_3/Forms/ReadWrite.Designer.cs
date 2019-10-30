@@ -31,6 +31,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.panelLists = new System.Windows.Forms.Panel();
             this.gbOptions = new System.Windows.Forms.GroupBox();
+            this.chbPrevDisable = new System.Windows.Forms.CheckBox();
             this.lSelectList = new System.Windows.Forms.Label();
             this.cbListsRW = new System.Windows.Forms.ComboBox();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -41,15 +42,14 @@
             this.btnPreviousWord = new System.Windows.Forms.Button();
             this.lResult = new System.Windows.Forms.Label();
             this.gbScore = new System.Windows.Forms.GroupBox();
+            this.lScoring = new System.Windows.Forms.Label();
+            this.lScore = new System.Windows.Forms.Label();
             this.lQuestionWord = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.chbRandom = new System.Windows.Forms.CheckBox();
-            this.chbPrevDisable = new System.Windows.Forms.CheckBox();
-            this.chbAlfOrder = new System.Windows.Forms.CheckBox();
-            this.chbOrderInsertion = new System.Windows.Forms.CheckBox();
-            this.lScore = new System.Windows.Forms.Label();
             this.btnHint = new System.Windows.Forms.Button();
-            this.lScoring = new System.Windows.Forms.Label();
+            this.chbOrderInsertion = new System.Windows.Forms.RadioButton();
+            this.chbRandom = new System.Windows.Forms.RadioButton();
+            this.chbAlfOrder = new System.Windows.Forms.RadioButton();
             this.panelLists.SuspendLayout();
             this.gbOptions.SuspendLayout();
             this.gbScore.SuspendLayout();
@@ -82,16 +82,27 @@
             // 
             // gbOptions
             // 
-            this.gbOptions.Controls.Add(this.chbOrderInsertion);
             this.gbOptions.Controls.Add(this.chbAlfOrder);
             this.gbOptions.Controls.Add(this.chbPrevDisable);
             this.gbOptions.Controls.Add(this.chbRandom);
+            this.gbOptions.Controls.Add(this.chbOrderInsertion);
             this.gbOptions.Location = new System.Drawing.Point(10, 57);
             this.gbOptions.Name = "gbOptions";
             this.gbOptions.Size = new System.Drawing.Size(199, 89);
             this.gbOptions.TabIndex = 11;
             this.gbOptions.TabStop = false;
             this.gbOptions.Text = "Options";
+            // 
+            // chbPrevDisable
+            // 
+            this.chbPrevDisable.AutoSize = true;
+            this.chbPrevDisable.Location = new System.Drawing.Point(106, 14);
+            this.chbPrevDisable.Name = "chbPrevDisable";
+            this.chbPrevDisable.Size = new System.Drawing.Size(80, 17);
+            this.chbPrevDisable.TabIndex = 1;
+            this.chbPrevDisable.Text = "Prev. Word";
+            this.chbPrevDisable.UseVisualStyleBackColor = true;
+            this.chbPrevDisable.CheckedChanged += new System.EventHandler(this.chbPrevDisable_CheckedChanged);
             // 
             // lSelectList
             // 
@@ -200,72 +211,14 @@
             this.gbScore.TabStop = false;
             this.gbScore.Text = "SCORE";
             // 
-            // lQuestionWord
+            // lScoring
             // 
-            this.lQuestionWord.BackColor = System.Drawing.Color.Transparent;
-            this.lQuestionWord.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lQuestionWord.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lQuestionWord.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.lQuestionWord.Location = new System.Drawing.Point(10, 168);
-            this.lQuestionWord.Name = "lQuestionWord";
-            this.lQuestionWord.Size = new System.Drawing.Size(340, 51);
-            this.lQuestionWord.TabIndex = 20;
-            this.lQuestionWord.Text = "sample word";
-            this.lQuestionWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Location = new System.Drawing.Point(282, 580);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 21;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // chbRandom
-            // 
-            this.chbRandom.AutoSize = true;
-            this.chbRandom.Location = new System.Drawing.Point(15, 19);
-            this.chbRandom.Name = "chbRandom";
-            this.chbRandom.Size = new System.Drawing.Size(66, 17);
-            this.chbRandom.TabIndex = 0;
-            this.chbRandom.Text = "Random";
-            this.chbRandom.UseVisualStyleBackColor = true;
-            // 
-            // chbPrevDisable
-            // 
-            this.chbPrevDisable.AutoSize = true;
-            this.chbPrevDisable.Location = new System.Drawing.Point(15, 42);
-            this.chbPrevDisable.Name = "chbPrevDisable";
-            this.chbPrevDisable.Size = new System.Drawing.Size(80, 17);
-            this.chbPrevDisable.TabIndex = 1;
-            this.chbPrevDisable.Text = "Prev. Word";
-            this.chbPrevDisable.UseVisualStyleBackColor = true;
-            this.chbPrevDisable.CheckedChanged += new System.EventHandler(this.chbPrevDisable_CheckedChanged);
-            // 
-            // chbAlfOrder
-            // 
-            this.chbAlfOrder.AutoSize = true;
-            this.chbAlfOrder.Location = new System.Drawing.Point(15, 65);
-            this.chbAlfOrder.Name = "chbAlfOrder";
-            this.chbAlfOrder.Size = new System.Drawing.Size(82, 17);
-            this.chbAlfOrder.TabIndex = 2;
-            this.chbAlfOrder.Text = "Alfab. Order";
-            this.chbAlfOrder.UseVisualStyleBackColor = true;
-            this.chbAlfOrder.CheckedChanged += new System.EventHandler(this.chbAlfOrder_CheckedChanged);
-            // 
-            // chbOrderInsertion
-            // 
-            this.chbOrderInsertion.AutoSize = true;
-            this.chbOrderInsertion.Checked = true;
-            this.chbOrderInsertion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbOrderInsertion.Location = new System.Drawing.Point(111, 19);
-            this.chbOrderInsertion.Name = "chbOrderInsertion";
-            this.chbOrderInsertion.Size = new System.Drawing.Size(84, 17);
-            this.chbOrderInsertion.TabIndex = 3;
-            this.chbOrderInsertion.Text = "Insert. Order";
-            this.chbOrderInsertion.UseVisualStyleBackColor = true;
+            this.lScoring.Location = new System.Drawing.Point(224, 16);
+            this.lScoring.Name = "lScoring";
+            this.lScoring.Size = new System.Drawing.Size(100, 46);
+            this.lScoring.TabIndex = 1;
+            this.lScoring.Text = "TRUE   +3\r\nFALSE  -1\r\nHINT   -2";
+            this.lScoring.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lScore
             // 
@@ -279,6 +232,30 @@
             this.lScore.Text = "18";
             this.lScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lQuestionWord
+            // 
+            this.lQuestionWord.BackColor = System.Drawing.Color.Transparent;
+            this.lQuestionWord.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lQuestionWord.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lQuestionWord.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.lQuestionWord.Location = new System.Drawing.Point(10, 168);
+            this.lQuestionWord.Name = "lQuestionWord";
+            this.lQuestionWord.Size = new System.Drawing.Size(340, 51);
+            this.lQuestionWord.TabIndex = 20;
+            this.lQuestionWord.Text = "sample word";
+            this.lQuestionWord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lQuestionWord.Visible = false;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(282, 580);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 21;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // btnHint
             // 
             this.btnHint.Location = new System.Drawing.Point(140, 340);
@@ -287,16 +264,40 @@
             this.btnHint.TabIndex = 22;
             this.btnHint.Text = "HINT";
             this.btnHint.UseVisualStyleBackColor = true;
+            this.btnHint.Visible = false;
             this.btnHint.Click += new System.EventHandler(this.btnHint_Click);
             // 
-            // lScoring
+            // chbOrderInsertion
             // 
-            this.lScoring.Location = new System.Drawing.Point(224, 16);
-            this.lScoring.Name = "lScoring";
-            this.lScoring.Size = new System.Drawing.Size(100, 46);
-            this.lScoring.TabIndex = 1;
-            this.lScoring.Text = "TRUE   +3\r\nFALSE  -1\r\nHINT   -2";
-            this.lScoring.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chbOrderInsertion.AutoSize = true;
+            this.chbOrderInsertion.Checked = true;
+            this.chbOrderInsertion.Location = new System.Drawing.Point(6, 14);
+            this.chbOrderInsertion.Name = "chbOrderInsertion";
+            this.chbOrderInsertion.Size = new System.Drawing.Size(94, 17);
+            this.chbOrderInsertion.TabIndex = 23;
+            this.chbOrderInsertion.TabStop = true;
+            this.chbOrderInsertion.Text = "Insertion Order";
+            this.chbOrderInsertion.UseVisualStyleBackColor = true;
+            // 
+            // chbRandom
+            // 
+            this.chbRandom.AutoSize = true;
+            this.chbRandom.Location = new System.Drawing.Point(6, 37);
+            this.chbRandom.Name = "chbRandom";
+            this.chbRandom.Size = new System.Drawing.Size(94, 17);
+            this.chbRandom.TabIndex = 24;
+            this.chbRandom.Text = "Random Order";
+            this.chbRandom.UseVisualStyleBackColor = true;
+            // 
+            // chbAlfOrder
+            // 
+            this.chbAlfOrder.AutoSize = true;
+            this.chbAlfOrder.Location = new System.Drawing.Point(6, 60);
+            this.chbAlfOrder.Name = "chbAlfOrder";
+            this.chbAlfOrder.Size = new System.Drawing.Size(78, 17);
+            this.chbAlfOrder.TabIndex = 25;
+            this.chbAlfOrder.Text = "Alph. Order";
+            this.chbAlfOrder.UseVisualStyleBackColor = true;
             // 
             // ReadWrite
             // 
@@ -348,12 +349,12 @@
         private System.Windows.Forms.GroupBox gbScore;
         private System.Windows.Forms.Label lQuestionWord;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.CheckBox chbAlfOrder;
         private System.Windows.Forms.CheckBox chbPrevDisable;
-        private System.Windows.Forms.CheckBox chbRandom;
-        private System.Windows.Forms.CheckBox chbOrderInsertion;
         private System.Windows.Forms.Label lScore;
         private System.Windows.Forms.Label lScoring;
         private System.Windows.Forms.Button btnHint;
+        private System.Windows.Forms.RadioButton chbOrderInsertion;
+        private System.Windows.Forms.RadioButton chbRandom;
+        private System.Windows.Forms.RadioButton chbAlfOrder;
     }
 }

@@ -14,6 +14,7 @@ namespace Wordies_3.Forms
         int position = 0;
         int score = 0;
         int hintCnt = 1;
+        bool isPlaying = true;
 
         public ReadWrite()
         {
@@ -52,7 +53,6 @@ namespace Wordies_3.Forms
                     .OrderBy(x => x.Word1)
                     .Skip(position)
                     .FirstOrDefault();
-
             }
             else if(chbOrderInsertion.Checked == true)
             {
@@ -84,6 +84,7 @@ namespace Wordies_3.Forms
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            //isPlaying = true;
             position = 0;
             hintCnt = 1;
             score = 0;
@@ -111,8 +112,33 @@ namespace Wordies_3.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("List is empty :(");
+                    isPlaying = false;
+                    //MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+                
+
+            if(isPlaying == true)
+            {
+                cbListsRW.Enabled = false;
+                lQuestionWord.Visible = true;
+                gbOptions.Enabled = false;
+                btnPlay.Text = "STOP";
+                btnPlay.BackColor = Color.PaleVioletRed;
+                btnHint.Visible = true;
+                txtAnswerWord.Focus();
+                isPlaying = false;
+            }
+            else
+            {
+                cbListsRW.Enabled = true;
+                lQuestionWord.Visible = false;
+                gbOptions.Enabled = true;
+                btnPlay.Text = "PLAY";
+                btnPlay.BackColor = Color.DodgerBlue;
+                btnHint.Visible = false;
+                isPlaying = true;
             }
         }
 
@@ -152,6 +178,7 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            txtAnswerWord.Clear();
         }
 
         private void btnPreviousWord_Click(object sender, EventArgs e)
@@ -190,6 +217,7 @@ namespace Wordies_3.Forms
                     MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            txtAnswerWord.Clear();
         }
 
         private void btnCheck_Click(object sender, EventArgs e)
@@ -227,16 +255,54 @@ namespace Wordies_3.Forms
             }
         }
 
-        private void chbAlfOrder_CheckedChanged(object sender, EventArgs e)
+        private void btnHint_Click(object sender, EventArgs e)
         {
-            if (chbAlfOrder.Checked == true)
+            List obj = cbListsRW.SelectedItem as List;
+            if (obj != null)
             {
-                chbOrderInsertion.Checked = false;
+                using (DBEntities db = new DBEntities())
+                {
+                    int count, len, lenRnd;
+                    Word query;
+
+                    if (chbRandom.Checked == false)
+                    {
+                        DisplWord(obj, db, out count, out query);
+                        len = query.Translation1.Count();
+                        if (hintCnt < len)
+                        {
+                            //MessageBox.Show(query.Translation1.Count().ToString();
+                            txtAnswerWord.Text = query.Translation1.Substring(0, hintCnt);
+                            hintCnt++;
+                        }
+                        else
+                        {
+                            NextWord();
+                        }
+                    }
+                    else
+                    {
+                        var queryRnd = db.Words
+                            .Where(x => obj.IDList == x.IDList)
+                            .OrderBy(x => x.ID)
+                            .Skip(position)
+                            .FirstOrDefault();
+
+                        lenRnd = queryRnd.Translation1.Count();
+                        if (hintCnt < lenRnd)
+                        {
+                            txtAnswerWord.Text = queryRnd.Translation1.Substring(0, hintCnt);
+                            hintCnt++;
+                        }
+                        else
+                        {
+                            NextWord();
+                        }
+                    }
+                }
             }
-            else
-            {
-                chbOrderInsertion.Checked = true;
-            }
+            score -= 2;
+            lScore.Text = score.ToString();
 
         }
 
@@ -253,35 +319,5 @@ namespace Wordies_3.Forms
                 btnPreviousWord.Visible = true;
             }
         }
-
-        private void btnHint_Click(object sender, EventArgs e)
-        {
-            List obj = cbListsRW.SelectedItem as List;
-            if (obj != null)
-            {
-                using (DBEntities db = new DBEntities())
-                {
-                    int count;
-                    Word query;
-                    DisplWord(obj, db, out count, out query);
-
-
-                    //var query = db.Words
-                    //    .Where(x => obj.IDList == x.IDList)
-                    //    .OrderBy(x => x.ID)
-                    //    .Skip(position)
-                    //    .FirstOrDefault();
-
-                    txtAnswerWord.Text = query.Translation1.Substring(0, hintCnt);
-                    hintCnt++;
-                }
-            }
-            score -= 2;
-            lScore.Text = score.ToString();
-
-        }
     }
 }
-
-
-// poprawic funkcjnalnosci random, prevword itd.. chodzi o scoring aby dobrze dzialal
