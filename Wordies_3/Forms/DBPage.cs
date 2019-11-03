@@ -208,12 +208,12 @@ namespace Wordies_3
         private void WordsCounter(IQueryable<Word> query)
         {
             int wordCounter = query.Count(x => x.ID > 0);
-            if(wordCounter == 0)
+            if (wordCounter == 0)
                 lWordsCounter.Text = "This List is empty.";
             else
                 lWordsCounter.Text = "This List contain: " + wordCounter + " words.";
 
-            txtListDescr.Text = wordCounter.ToString(); //tutaj zrobic tak aby wyswietlalo description dla listy.
+            txtListDescr.Text = wordCounter.ToString(); //tutaj zrobic tak aby wyswietlalo description dla listy. <--------------
         }
 
         private void btnManageList_Click(object sender, EventArgs e)

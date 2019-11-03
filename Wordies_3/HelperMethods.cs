@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Forms;
 
 namespace Wordies_3
@@ -16,9 +12,7 @@ namespace Wordies_3
                 db.Configuration.ProxyCreationEnabled = false;
                 cb.DataSource = db.Lists.ToList();
                 cb.ValueMember = "Name";
-                //cbLists.DisplayMember = "ListOne";
             }
-            //Clear();
         }
 
         public static void Clear(TextBox txt1, TextBox txt2, TextBox txt3, Button b1, Button b2, Button b3, Word modelWord, List modelList)

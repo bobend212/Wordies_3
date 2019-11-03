@@ -31,7 +31,10 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.panelLists = new System.Windows.Forms.Panel();
             this.gbOptions = new System.Windows.Forms.GroupBox();
+            this.chbAlfOrder = new System.Windows.Forms.RadioButton();
             this.chbPrevDisable = new System.Windows.Forms.CheckBox();
+            this.chbRandom = new System.Windows.Forms.RadioButton();
+            this.chbOrderInsertion = new System.Windows.Forms.RadioButton();
             this.lSelectList = new System.Windows.Forms.Label();
             this.cbListsRW = new System.Windows.Forms.ComboBox();
             this.btnPlay = new System.Windows.Forms.Button();
@@ -47,9 +50,6 @@
             this.lQuestionWord = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnHint = new System.Windows.Forms.Button();
-            this.chbOrderInsertion = new System.Windows.Forms.RadioButton();
-            this.chbRandom = new System.Windows.Forms.RadioButton();
-            this.chbAlfOrder = new System.Windows.Forms.RadioButton();
             this.panelLists.SuspendLayout();
             this.gbOptions.SuspendLayout();
             this.gbScore.SuspendLayout();
@@ -93,6 +93,16 @@
             this.gbOptions.TabStop = false;
             this.gbOptions.Text = "Options";
             // 
+            // chbAlfOrder
+            // 
+            this.chbAlfOrder.AutoSize = true;
+            this.chbAlfOrder.Location = new System.Drawing.Point(6, 60);
+            this.chbAlfOrder.Name = "chbAlfOrder";
+            this.chbAlfOrder.Size = new System.Drawing.Size(78, 17);
+            this.chbAlfOrder.TabIndex = 25;
+            this.chbAlfOrder.Text = "Alph. Order";
+            this.chbAlfOrder.UseVisualStyleBackColor = true;
+            // 
             // chbPrevDisable
             // 
             this.chbPrevDisable.AutoSize = true;
@@ -103,6 +113,28 @@
             this.chbPrevDisable.Text = "Prev. Word";
             this.chbPrevDisable.UseVisualStyleBackColor = true;
             this.chbPrevDisable.CheckedChanged += new System.EventHandler(this.chbPrevDisable_CheckedChanged);
+            // 
+            // chbRandom
+            // 
+            this.chbRandom.AutoSize = true;
+            this.chbRandom.Location = new System.Drawing.Point(6, 37);
+            this.chbRandom.Name = "chbRandom";
+            this.chbRandom.Size = new System.Drawing.Size(94, 17);
+            this.chbRandom.TabIndex = 24;
+            this.chbRandom.Text = "Random Order";
+            this.chbRandom.UseVisualStyleBackColor = true;
+            // 
+            // chbOrderInsertion
+            // 
+            this.chbOrderInsertion.AutoSize = true;
+            this.chbOrderInsertion.Checked = true;
+            this.chbOrderInsertion.Location = new System.Drawing.Point(6, 14);
+            this.chbOrderInsertion.Name = "chbOrderInsertion";
+            this.chbOrderInsertion.Size = new System.Drawing.Size(94, 17);
+            this.chbOrderInsertion.TabIndex = 23;
+            this.chbOrderInsertion.TabStop = true;
+            this.chbOrderInsertion.Text = "Insertion Order";
+            this.chbOrderInsertion.UseVisualStyleBackColor = true;
             // 
             // lSelectList
             // 
@@ -122,6 +154,7 @@
             this.cbListsRW.Name = "cbListsRW";
             this.cbListsRW.Size = new System.Drawing.Size(301, 21);
             this.cbListsRW.TabIndex = 2;
+            this.cbListsRW.SelectedValueChanged += new System.EventHandler(this.cbListsRW_SelectedValueChanged);
             // 
             // btnPlay
             // 
@@ -267,38 +300,6 @@
             this.btnHint.Visible = false;
             this.btnHint.Click += new System.EventHandler(this.btnHint_Click);
             // 
-            // chbOrderInsertion
-            // 
-            this.chbOrderInsertion.AutoSize = true;
-            this.chbOrderInsertion.Checked = true;
-            this.chbOrderInsertion.Location = new System.Drawing.Point(6, 14);
-            this.chbOrderInsertion.Name = "chbOrderInsertion";
-            this.chbOrderInsertion.Size = new System.Drawing.Size(94, 17);
-            this.chbOrderInsertion.TabIndex = 23;
-            this.chbOrderInsertion.TabStop = true;
-            this.chbOrderInsertion.Text = "Insertion Order";
-            this.chbOrderInsertion.UseVisualStyleBackColor = true;
-            // 
-            // chbRandom
-            // 
-            this.chbRandom.AutoSize = true;
-            this.chbRandom.Location = new System.Drawing.Point(6, 37);
-            this.chbRandom.Name = "chbRandom";
-            this.chbRandom.Size = new System.Drawing.Size(94, 17);
-            this.chbRandom.TabIndex = 24;
-            this.chbRandom.Text = "Random Order";
-            this.chbRandom.UseVisualStyleBackColor = true;
-            // 
-            // chbAlfOrder
-            // 
-            this.chbAlfOrder.AutoSize = true;
-            this.chbAlfOrder.Location = new System.Drawing.Point(6, 60);
-            this.chbAlfOrder.Name = "chbAlfOrder";
-            this.chbAlfOrder.Size = new System.Drawing.Size(78, 17);
-            this.chbAlfOrder.TabIndex = 25;
-            this.chbAlfOrder.Text = "Alph. Order";
-            this.chbAlfOrder.UseVisualStyleBackColor = true;
-            // 
             // ReadWrite
             // 
             this.AcceptButton = this.btnCheck;
@@ -337,7 +338,6 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Panel panelLists;
         private System.Windows.Forms.Label lSelectList;
-        private System.Windows.Forms.ComboBox cbListsRW;
         private System.Windows.Forms.Button btnPlay;
         private System.Windows.Forms.GroupBox gbOptions;
         private System.Windows.Forms.TextBox txtAnswerWord;
@@ -356,5 +356,6 @@
         private System.Windows.Forms.RadioButton chbOrderInsertion;
         private System.Windows.Forms.RadioButton chbRandom;
         private System.Windows.Forms.RadioButton chbAlfOrder;
+        private System.Windows.Forms.ComboBox cbListsRW;
     }
 }

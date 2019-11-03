@@ -15,6 +15,10 @@ namespace Wordies_3.Forms
         int score = 0;
         int hintCnt = 1;
         bool isPlaying = true;
+        string selectedListName = "";
+        int wordCounter = 0;
+        int attemps, fails = 0;
+
 
         public ReadWrite()
         {
@@ -29,6 +33,7 @@ namespace Wordies_3.Forms
         private void ReadWrite_Load(object sender, EventArgs e)
         {
             HelperMethods.PopulateComboBoxListsDB(cbListsRW);
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -41,11 +46,9 @@ namespace Wordies_3.Forms
         private void DisplWord(List obj, DBEntities db, out int count, out Word query)
         {
             Random rnd = new Random();
-
             count = db.Words.Count(x => obj.IDList == x.IDList);
+            wordCounter = count;
             db.Configuration.ProxyCreationEnabled = false;
-
-
             if (chbAlfOrder.Checked == true)
             {
                 query = db.Words
@@ -84,11 +87,9 @@ namespace Wordies_3.Forms
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            //isPlaying = true;
+
             position = 0;
             hintCnt = 1;
-            score = 0;
-            lScore.Text = score.ToString();
 
             List obj = cbListsRW.SelectedItem as List;
             if (obj != null)
@@ -114,10 +115,8 @@ namespace Wordies_3.Forms
                 {
                     MessageBox.Show("List is empty :(");
                     isPlaying = false;
-                    //MessageBox.Show(ex.Message, "Messageff", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-                
 
             if(isPlaying == true)
             {
@@ -132,6 +131,8 @@ namespace Wordies_3.Forms
             }
             else
             {
+                SummaryRW summaryRW = new SummaryRW(selectedListName, wordCounter, attemps, score, fails);
+                summaryRW.ShowDialog();
                 cbListsRW.Enabled = true;
                 lQuestionWord.Visible = false;
                 gbOptions.Enabled = true;
@@ -139,12 +140,19 @@ namespace Wordies_3.Forms
                 btnPlay.BackColor = Color.DodgerBlue;
                 btnHint.Visible = false;
                 isPlaying = true;
+                attemps = 0;
             }
+
+            score = 0;
+            fails = 0;
+            lScore.Text = score.ToString();
         }
 
         private void btnNextWord_Click(object sender, EventArgs e)
         {
             NextWord();
+            //MessageBox.Show(selectedValue);
+
         }
 
         private void NextWord()
@@ -227,31 +235,66 @@ namespace Wordies_3.Forms
 
         private void CheckAnswer()
         {
+            attemps++;
             List obj = cbListsRW.SelectedItem as List;
 
             using (DBEntities db = new DBEntities())
             {
                 int count;
                 Word query;
-                DisplWord(obj, db, out count, out query);
 
-                if (txtAnswerWord.Text == query.Translation1.ToString() 
-                    || (txtAnswerWord.Text == query.Translation2.ToString() && !string.IsNullOrWhiteSpace(txtAnswerWord.Text)))
+                if (chbRandom.Checked == false)
                 {
-                    lResult.ForeColor = Color.LightGreen;
-                    lResult.Text = "TRUE!";
-                    txtAnswerWord.Clear();
-                    score += 2;
-                    lScore.Text = score.ToString();
-                    NextWord();
+                    DisplWord(obj, db, out count, out query);
+
+
+                    if (txtAnswerWord.Text == query.Translation1.ToString()
+                        || (txtAnswerWord.Text == query.Translation2.ToString() && !string.IsNullOrWhiteSpace(txtAnswerWord.Text)))
+                    {
+                        lResult.ForeColor = Color.LightGreen;
+                        lResult.Text = "TRUE!";
+                        txtAnswerWord.Clear();
+                        score += 2;
+                        lScore.Text = score.ToString();
+                        NextWord();
+                    }
+                    else
+                    {
+                        score -= 1;
+                        lScore.Text = score.ToString();
+                        lResult.ForeColor = Color.Red;
+                        lResult.Text = "FALSE!";
+                        fails++;
+                    }
                 }
                 else
                 {
-                    score -= 1;
-                    lScore.Text = score.ToString();
-                    lResult.ForeColor = Color.Red;
-                    lResult.Text = "FALSE!";
+                    var queryRnd = db.Words
+                        .Where(x => obj.IDList == x.IDList)
+                        .OrderBy(x => x.ID)
+                        .Skip(position)
+                        .FirstOrDefault();
+
+                    if (txtAnswerWord.Text == queryRnd.Translation1.ToString()
+                        || (txtAnswerWord.Text == queryRnd.Translation2.ToString() && !string.IsNullOrWhiteSpace(txtAnswerWord.Text)))
+                    {
+                        lResult.ForeColor = Color.LightGreen;
+                        lResult.Text = "TRUE!";
+                        txtAnswerWord.Clear();
+                        score += 2;
+                        lScore.Text = score.ToString();
+                        NextWord();
+                    }
+                    else
+                    {
+                        score -= 1;
+                        lScore.Text = score.ToString();
+                        lResult.ForeColor = Color.Red;
+                        lResult.Text = "FALSE!";
+                        fails++;
+                    }
                 }
+
             }
         }
 
@@ -319,5 +362,13 @@ namespace Wordies_3.Forms
                 btnPreviousWord.Visible = true;
             }
         }
+
+        private void cbListsRW_SelectedValueChanged(object sender, EventArgs e)
+        {
+            selectedListName = cbListsRW.SelectedValue.ToString();
+        }
     }
 }
+
+
+//naprawiony random ale trzeba poprawic kod
