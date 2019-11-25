@@ -2,8 +2,6 @@
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Wordies_3.Forms
@@ -18,7 +16,6 @@ namespace Wordies_3.Forms
         string selectedListName = "";
         int wordCounter = 0;
         int attemps, fails = 0;
-
 
         public ReadWrite()
         {
@@ -57,7 +54,7 @@ namespace Wordies_3.Forms
                     .Skip(position)
                     .FirstOrDefault();
             }
-            else if(chbOrderInsertion.Checked == true)
+            else if (chbOrderInsertion.Checked == true)
             {
                 query = db.Words
                     .Where(x => obj.IDList == x.IDList)
@@ -65,7 +62,7 @@ namespace Wordies_3.Forms
                     .Skip(position)
                     .FirstOrDefault();
             }
-            else if(chbRandom.Checked == true)
+            else if (chbRandom.Checked == true)
             {
                 position = rnd.Next(0, count);
                 query = db.Words
@@ -82,7 +79,7 @@ namespace Wordies_3.Forms
                     .Skip(position)
                     .FirstOrDefault();
             }
-            
+
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -113,12 +110,12 @@ namespace Wordies_3.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("List is empty :(");
+                    MessageBox.Show($"List is empty :( {ex}");
                     isPlaying = false;
                 }
             }
 
-            if(isPlaying == true)
+            if (isPlaying == true)
             {
                 cbListsRW.Enabled = false;
                 lQuestionWord.Visible = true;
@@ -151,8 +148,6 @@ namespace Wordies_3.Forms
         private void btnNextWord_Click(object sender, EventArgs e)
         {
             NextWord();
-            //MessageBox.Show(selectedValue);
-
         }
 
         private void NextWord()
@@ -369,6 +364,3 @@ namespace Wordies_3.Forms
         }
     }
 }
-
-
-//naprawiony random ale trzeba poprawic kod

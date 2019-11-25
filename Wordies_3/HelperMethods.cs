@@ -5,6 +5,7 @@ namespace Wordies_3
 {
     public static class HelperMethods
     {
+
         public static void PopulateComboBoxListsDB(ComboBox cb)
         {
             using (DBEntities db = new DBEntities())

@@ -46,6 +46,7 @@
             this.lWords = new System.Windows.Forms.Label();
             this.txtListName = new System.Windows.Forms.TextBox();
             this.lListName = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.gbSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,11 +213,22 @@
             this.lListName.TabIndex = 0;
             this.lListName.Text = "List Name:";
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(220, 260);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(119, 46);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // SummaryRW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 313);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.gbSummary);
             this.Controls.Add(this.btnSaveAttemption);
             this.Name = "SummaryRW";
@@ -249,5 +261,6 @@
         private System.Windows.Forms.Label lWords;
         private System.Windows.Forms.TextBox txtListName;
         private System.Windows.Forms.Label lListName;
+        private System.Windows.Forms.Button btnClose;
     }
 }
